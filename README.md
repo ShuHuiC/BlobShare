@@ -192,7 +192,7 @@ This will download an XML file containing the Web Deploy deployment details. Thi
 **Name**|a display name of your choice, for example “Blob Share”	
 **Mode**|Enter settings manually	
 **Realm**|http://{your website name}.azurewebsites.net/	
-**Return URL**|http://{your website name}.azurewebsites.net/	
+**Return URL**|http://{your website name}.azurewebsites.net/Account/LogOn	
 **Error URL (optional)**|(leave empty)	
 **Token format**|SAML 2.0	
 **Token encryption key**|None	
