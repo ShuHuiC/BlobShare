@@ -1,0 +1,66 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobShare.Web", "BlobShare.Web\BlobShare.Web.csproj", "{BADF0F54-1930-4848-B680-33F8B3FF46A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobShare.Data", "BlobShare.Data\BlobShare.Data.csproj", "{B3219D4E-B116-4CBC-BE38-8A3CF3BA8149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobShare.Data.Tests", "BlobShare.Data.Tests\BlobShare.Data.Tests.csproj", "{A510C72E-505B-46B1-902D-9DBDCD9E6B66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7CF48BFC-072F-42B1-BB86-22C55D3385A3}"
+	ProjectSection(SolutionItems) = preProject
+		BlobShare.vsmdi = BlobShare.vsmdi
+		Local.testsettings = Local.testsettings
+		StyleCop.Targets = StyleCop.Targets
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobShare.Core", "BlobShare.Core\BlobShare.Core.csproj", "{BE01350A-589C-478B-BBBB-7CF1A984D81E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobShare.Core.Tests", "BlobShare.Core.Tests\BlobShare.Core.Tests.csproj", "{8F68C891-9B08-4FD4-8A6A-6C6C5B23E79C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobShare.Web.Tests", "BlobShare.Web.Tests\BlobShare.Web.Tests.csproj", "{CC9B5E60-FCFD-4F9D-8725-1AA3D47F299D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobShare.Security", "BlobShare.Security\BlobShare.Security.csproj", "{5084AE8D-7E13-4028-9365-D07B8CD682B5}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = BlobShare.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3219D4E-B116-4CBC-BE38-8A3CF3BA8149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3219D4E-B116-4CBC-BE38-8A3CF3BA8149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3219D4E-B116-4CBC-BE38-8A3CF3BA8149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3219D4E-B116-4CBC-BE38-8A3CF3BA8149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A510C72E-505B-46B1-902D-9DBDCD9E6B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A510C72E-505B-46B1-902D-9DBDCD9E6B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A510C72E-505B-46B1-902D-9DBDCD9E6B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A510C72E-505B-46B1-902D-9DBDCD9E6B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE01350A-589C-478B-BBBB-7CF1A984D81E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE01350A-589C-478B-BBBB-7CF1A984D81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE01350A-589C-478B-BBBB-7CF1A984D81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE01350A-589C-478B-BBBB-7CF1A984D81E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F68C891-9B08-4FD4-8A6A-6C6C5B23E79C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F68C891-9B08-4FD4-8A6A-6C6C5B23E79C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F68C891-9B08-4FD4-8A6A-6C6C5B23E79C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F68C891-9B08-4FD4-8A6A-6C6C5B23E79C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC9B5E60-FCFD-4F9D-8725-1AA3D47F299D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC9B5E60-FCFD-4F9D-8725-1AA3D47F299D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC9B5E60-FCFD-4F9D-8725-1AA3D47F299D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC9B5E60-FCFD-4F9D-8725-1AA3D47F299D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5084AE8D-7E13-4028-9365-D07B8CD682B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5084AE8D-7E13-4028-9365-D07B8CD682B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5084AE8D-7E13-4028-9365-D07B8CD682B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5084AE8D-7E13-4028-9365-D07B8CD682B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BADF0F54-1930-4848-B680-33F8B3FF46A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BADF0F54-1930-4848-B680-33F8B3FF46A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BADF0F54-1930-4848-B680-33F8B3FF46A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BADF0F54-1930-4848-B680-33F8B3FF46A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

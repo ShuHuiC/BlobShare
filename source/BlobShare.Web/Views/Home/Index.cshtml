@@ -1,0 +1,97 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Blob Share | Home";
+}
+
+<h1>Blob Share</h1>
+@if (!Request.IsAuthenticated) {
+    <p>
+    Welcome to Blob Share, an easy way to share large 
+    files and get to know <a href="http://www.azure.com">Microsoft Windows Azure</a>!
+    </p>
+    <p>
+        @Html.ActionLink("Sign In", "LogOn", "Account")
+    </p>
+} else {
+    <br />
+    <p>
+        Welcome back to Blob Share! You can view or download your blobs from @Html.ActionLink("My Blobs", "Index", "MyBlobs").
+    </p>
+    
+    if (Model.Permissions != null && Model.Permissions.Count() > 0) {
+        <h2>New Resources</h2>
+        <div class="grid">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Permissions)
+            {
+                <tr>
+                    <td>
+                        @if (!item.IsBlob) {
+                            @Html.ActionLink(item.BlobSetName, "ViewBlobSet", "MyBlobs", new { blobSetId = item.BlobSetId }, null)
+                        } else {
+                            @Html.ActionLink(item.BlobName, "ViewBlob", "MyBlobs", new { BlobId = item.BlobId }, null)
+                        }
+                    </td>
+                    <td>
+                        @if (item.IsBlob) {
+                            @Html.ActionLink("Download", "DownloadBlob", "MyBlobs", new { BlobId = item.BlobId }, null)
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        </div>
+    }
+    <br />
+    if (Model.MostVisited != null && Model.MostVisited.Count() > 0) {
+        <h2>Most Visited</h2>
+        <div class="grid">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            @foreach (var item in Model.MostVisited)
+            {
+                <tr>
+                    <td>
+                        @if (item.IsBlobSet) {
+                            @Html.ActionLink(item.Name, "ViewBlobSet", "MyBlobs", new { blobSetId = item.Id }, null)
+                        } else {
+                            @Html.ActionLink(item.Name, "ViewBlob", "MyBlobs", new { BlobId = item.Id }, null)
+                        }
+                    </td>
+                    <td>
+                        @if (!item.IsBlobSet) {
+                            @Html.ActionLink("Download", "DownloadBlob", "MyBlobs", new { BlobId = item.Id }, null)
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+        </div>
+    }
+}
+
+@section StylesContent {
+<style>
+    h1 { font-size: 57px }
+    section#main {
+        padding: 70px 40px 70px 370px;
+        font-size: 20px;
+        min-height: 330px;
+        background: #fff url(@Url.Content("~/Content/images/home_bg.jpg")) no-repeat bottom left;
+    }
+</style>
+}

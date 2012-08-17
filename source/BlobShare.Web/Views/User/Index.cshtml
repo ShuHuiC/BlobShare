@@ -1,0 +1,37 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Blob Share | Users";
+}
+
+<h1>Users</h1>
+
+<ul class="actions">
+    <li>@Html.ActionLink("Invite User", "Create", null, new { @class = "btn add" } )</li>
+    <li>@Html.ActionLink("Bulk Invite", "BulkCreate", null, new { @class = "btn add" } )</li>
+</ul>
+    
+<div class="gridContainer">
+    <div id="usersSearch" style="display: none">
+        <label>Filter:  <input type="text" class="searchbox" /></label>
+    </div>
+    <div id="usersEmpty" class="empty" style="display: none">No users found.</div>
+    <div id="usersResults" class="grid">Please wait. Loading users...</div>
+    <div id="usersPager" class="pager" style="display: none"></div>
+</div>
+
+@section StylesContent {
+    <script src="@Url.Content("~/Content/scripts/jquery-1.4.4.min.js")"></script>
+}
+
+@section ScriptsContent {
+    <script>
+        var url = '@Url.Action("UserList")';
+        var pageIdentifier = 'users';
+        var detailsUrl = '@Url.Action("Details")';
+    </script>
+    <script src="@Url.Content("~/Content/scripts/lib.common.js")"></script>
+    <script src="@Url.Content("~/Content/scripts/lib.datagrid.js")"></script>
+    <script src="@Url.Content("~/Content/scripts/lib.paginator.js")"></script>
+    <script src="@Url.Content("~/Content/scripts/BlobShare.datagrid.js")"></script>
+    <script src="@Url.Content("~/Content/scripts/page.users.js")"></script>
+}

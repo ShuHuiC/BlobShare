@@ -1,0 +1,11 @@
+﻿<div id="userInfo">
+@if(Request.IsAuthenticated) {
+    if (!string.IsNullOrWhiteSpace(this.User.Identity.Name)) {
+        <text>Welcome <strong> @Html.ActionLink((string) this.User.Identity.Name, "Profile", "Account") </strong> /</text>
+    }    
+    @Html.ActionLink("Sign Out", "LogOff", "Account")    
+}
+else {
+    @Html.ActionLink("Sign In", "LogOn", "Account")
+}
+</div>

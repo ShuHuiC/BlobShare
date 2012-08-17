@@ -1,0 +1,49 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.MyBlobSetViewModel
+@{
+    ViewBag.Title = "Blob Share | My Blobs";
+}
+
+    <h1>@Html.ActionLink("My Blobs", "Index")</h1>
+    <h2>@Model.Name</h2>
+
+        
+    <dl>
+        <dt>Description</dt>
+        <dd>@(string.IsNullOrWhiteSpace(Model.Description) ? "-" : Model.Description)</dd>
+    </dl>
+
+    <h3>Blobs</h3>
+
+    @if (Model.Blobs != null && Model.Blobs.Count() > 0)
+    {
+    <div class="grid">
+        <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Blobs)
+               {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Name, "ViewBlob", new { BlobId = item.BlobId })
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @Html.ActionLink("Download", "DownloadBlob", new { BlobId = item.BlobId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        </table>
+    </div>
+    } else {
+        <div class="empty">This blob set contains no blobs.</div>
+    }
+

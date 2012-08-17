@@ -1,0 +1,110 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.BlobPermissionViewModel
+@{
+    ViewBag.Title = "Blob Share | Blobs Permissions";
+}
+
+<h1>@Html.ActionLink("Blobs", "Index") </h1>
+<h2>@Html.ActionLink(Model.Blob.Name, "Details", new { id = Model.Blob.BlobId }) </h2>
+
+<ul class="actions">
+    <li>@Html.ActionLink("Details", "Details", new { id = Model.Blob.BlobId }, new { @class = "btn details" })</li>
+    <li>@Html.ActionLink("Download", "Download", new { id = Model.Blob.BlobId }, new { @class = "btn download" })</li>
+</ul>
+
+<h3>Role Permissions</h3>
+
+<div class="permissionBox">
+@if (Model.Roles.Count() > 0)
+    { 
+    using (Html.BeginForm("GrantRolePermission", "Blob", new { id = this.Model.Blob.BlobId })) { 
+        <text>Role</text>
+        @Html.DropDownList("SelectedRole", Model.Roles, "(select)", new { style = "width:120px;" })
+        <text>for</text>
+        @Html.DropDownList("SelectedExpiration", Model.Expirations)
+        <input type="submit" value="Grant" /> 
+    } 
+} else { 
+    <div class="empty">No additional roles are available.</div>
+} 
+</div>
+
+@if(Model.Blob.Permissions.Count(p => p.Roles.Count() > 0 && p.ExpirationDateTime > DateTime.UtcNow) > 0) { 
+    <div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th width="25%">Role</th>
+            <th width="25%">Permissions</th>
+            <th width="35%">Expiration Date/Time</th>
+            <th width="15%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var permission in Model.Blob.Permissions.Where(p => p.Roles.Count() > 0 && p.ExpirationDateTime > DateTime.UtcNow)) 
+        { 
+            <tr>
+                <td>@permission.Roles.First().RoleName </td>
+                <td>@Enum.GetName(typeof(Microsoft.Samples.DPE.BlobShare.Data.Model.Privilege), permission.Privilege) </td>
+                <td>@Microsoft.Samples.DPE.BlobShare.Web.Helpers.DateTimeHelper.ToLocalTime(permission.ExpirationDateTime) </td>
+                <td>@Html.ActionLink("Revoke", "RevokeRolePermission", new { id = this.Model.Blob.BlobId, selectedPermission = permission.PermissionId })</td>
+            </tr>
+        } 
+        </tbody>
+    </table>
+    </div>
+} else { 
+    <div class="empty">No Roles are assigned.</div>
+} 
+
+<br />
+
+<h3>User Permissions</h3>
+
+<div class="permissionBox">
+@if (Model.Users.Count() > 0)
+    { 
+    using (Html.BeginForm("GrantUserPermission", "Blob", new { id = this.Model.Blob.BlobId })) { 
+        <text>User</text>
+        @Html.DropDownList("SelectedUser", Model.Users, "(select)", new { style = "width:120px;" })
+        <text>for</text>
+        @Html.DropDownList("SelectedExpiration", Model.Expirations) 
+        <input type="submit" value="Grant" /> 
+    } 
+} else { 
+    <div class="empty">No additional users are available.</div>
+} 
+</div>
+
+@if(Model.Blob.Permissions.Count(p => p.Users.Count() > 0 && p.ExpirationDateTime > DateTime.UtcNow) > 0) { 
+    <div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th width="25%">User</th>
+            <th width="25%">Permissions</th>
+            <th width="35%">Expiration Date/Time</th>
+            <th width="15%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var permission in Model.Blob.Permissions.Where(p => p.Users.Count() > 0 && p.ExpirationDateTime > DateTime.UtcNow)) 
+        { 
+            <tr>
+                <td>@permission.Users.First().Name </td>
+                <td>@Enum.GetName(typeof(Microsoft.Samples.DPE.BlobShare.Data.Model.Privilege), permission.Privilege) </td>
+                <td>@Microsoft.Samples.DPE.BlobShare.Web.Helpers.DateTimeHelper.ToLocalTime(permission.ExpirationDateTime) </td>
+                <td>@Html.ActionLink("Revoke", "RevokeUserPermission", new { id = this.Model.Blob.BlobId, selectedPermission = permission.PermissionId })</td>
+            </tr>
+        } 
+        </tbody>
+    </table>
+    </div>
+} else { 
+    <div class="empty">No User Permissions are assigned.</div>
+} 
+
+@section StylesContent {
+    <style>
+        .permissionBox { background-color: #eee; padding: 4px 6px; }
+    </style>
+}

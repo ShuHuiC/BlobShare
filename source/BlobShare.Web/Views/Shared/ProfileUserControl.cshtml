@@ -1,0 +1,19 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.ProfileViewModel
+
+@using (Html.BeginForm("Profile", "Account"))
+{ 
+    <div class="form">
+        <div class="left-box">
+            <div class="editor-label">Name</div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name) 
+                @Html.ValidationMessageFor(m => m.Name) 
+                @Html.HiddenFor(m => m.OriginalName) 
+            </div>
+        </div>
+        <div class="submit clear">
+            <input type="submit" value="Update" />
+        </div>
+        <div class="empty">You will have to log back into the application.</div>
+    </div>
+} 

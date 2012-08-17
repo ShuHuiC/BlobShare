@@ -1,0 +1,113 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.BlobSetPermissionViewModel
+
+@{
+    ViewBag.Title = "Blob Share | Blob Set Permissions";
+}
+
+<h1>@Html.ActionLink("Blob Sets", "Index")</h1>
+<h2>@Html.ActionLink(Model.BlobSet.Name, "Details", new { id = Model.BlobSet.BlobSetId })</h2>
+
+<ul class="actions">
+    <li>@Html.ActionLink("Details", "Details", new { id = Model.BlobSet.BlobSetId }, new { @class = "btn details" })</li>
+</ul>
+
+<h3>Role Permissions</h3>
+
+<div class="permissionBox">
+@if (Model.Roles.Count() > 0)
+{
+    using (Html.BeginForm("GrantRolePermission", "BlobSet", new { id = this.Model.BlobSet.BlobSetId }))
+    {
+        @:Role
+        @Html.DropDownList("SelectedRole", Model.Roles, "(select)", new { style = "width:120px;" })
+        @:for
+        @Html.DropDownList("SelectedExpiration", Model.Expirations)
+        <input type="submit" value="Grant" /> 
+    }
+} else { 
+    <div class="empty">No additional roles are available.</div>
+}
+</div>
+
+@if(Model.BlobSet.Permissions.Count(p => p.Roles.Count() > 0 && p.ExpirationDateTime > DateTime.UtcNow) > 0)
+{
+<div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th width="25%">Role</th>
+            <th width="25%">Privilege</th>
+            <th width="35%">Expiration Date/Time</th>
+            <th width="15%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var permission in Model.BlobSet.Permissions.Where(p => p.Roles.Count() > 0 && p.ExpirationDateTime > DateTime.UtcNow)) 
+        {
+            <tr>
+                <td>@permission.Roles.First().RoleName</td>
+                <td>@Enum.GetName(typeof(Privilege), permission.Privilege)</td>
+                <td>@DateTimeHelper.ToLocalTime(permission.ExpirationDateTime)</td>
+                <td>@Html.ActionLink("revoke", "RevokeRolePermission", new { id = this.Model.BlobSet.BlobSetId, selectedPermission = permission.PermissionId })</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
+} else {
+    <div class="empty">No Roles are assigned.</div>
+}
+
+<br />
+    
+<h3>User Permissions</h3>
+
+<div class="permissionBox">
+@if (Model.Users.Count() > 0)
+{
+    using (Html.BeginForm("GrantUserPermission", "BlobSet", new { id = this.Model.BlobSet.BlobSetId }))
+    {
+        @:User 
+        @Html.DropDownList("SelectedUser", Model.Users, "(select)", new { style = "width:120px;" }) 
+        @:for 
+        @Html.DropDownList("SelectedExpiration", Model.Expirations)
+        <input type="submit" value="Grant" /> 
+    }
+} else {
+    <div class="empty">No additional users are available.</div>
+}
+</div>
+    
+@if(Model.BlobSet.Permissions.Count(p => p.Users.Count() > 0 && p.ExpirationDateTime > DateTime.UtcNow) > 0) {
+<div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th width="25%">User</th>
+            <th width="25%">Privilege</th>
+            <th width="35%">Expiration Date/Time</th>
+            <th width="15%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var permission in Model.BlobSet.Permissions.Where(p => p.Users.Count() > 0 && p.ExpirationDateTime > DateTime.UtcNow)) 
+        {
+            <tr>
+                <td>@permission.Users.First().Name</td>
+                <td>@Enum.GetName(typeof(Privilege), permission.Privilege)</td>
+                <td>@DateTimeHelper.ToLocalTime(permission.ExpirationDateTime)</td>
+                <td>@Html.ActionLink("revoke", "RevokeUserPermission", new { id = this.Model.BlobSet.BlobSetId, selectedPermission = permission.PermissionId })</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
+} else {
+    <div class="empty">No User Permissions are assigned.</div>
+}
+
+@section StylesContent {
+<style>
+    .permissionBox { background-color: #eee; padding: 4px 6px; }
+</style>
+}

@@ -1,0 +1,33 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.UserInviteViewModel
+@{
+    ViewBag.Title = "Blob Share | Invite";
+}
+
+<h1>@Html.ActionLink("Users", "Index")</h1>
+<h2>@Html.ActionLink(Model.User.Name, "Details", new { id = Model.User.UserId })</h2>
+    
+<ul class="actions">
+</ul>
+
+@using (Html.BeginForm())
+{
+    <div class="form">
+        <div class="left-box">
+            <div class="editor-label">Email</div>
+            <div class="editor-field">@Model.User.Email</div>
+            <div class="editor-label">Personal Message</div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.PersonalMessage)
+                @Html.ValidationMessageFor(m => m.PersonalMessage)
+            </div>
+        </div>
+        <div class="submit clear">
+            <input type="submit" value="Send Invitation" />
+            <div class="smtp-error">
+                @Html.ValidationMessage("SmtpError", "Oops! There was a problem with the SMTP Server when sending the invitation e-mail. Please check the configuration in the Web.config file.")
+            </div>
+        </div>
+            
+    </div>
+}
+

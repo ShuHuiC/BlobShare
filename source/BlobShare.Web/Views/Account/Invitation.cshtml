@@ -1,0 +1,19 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.ProfileViewModel
+@{
+    ViewBag.Title = "Blob Share | Activate Your Invitation";
+}
+
+<div class="title">
+    Your invitation was activated successfully!
+</div>
+<p>
+    Please, update your profile now:
+    @{Html.RenderPartial("ProfileUserControl", Model);}
+</p>
+
+@section StylesContent {
+}
+
+@section ScriptsContent {
+}
+

@@ -1,0 +1,119 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.BlobSetActivityViewModel
+
+@{
+    ViewBag.Title = "Blob Share | Blob Set Activity";
+}
+
+<h1>@Html.ActionLink("Reports", "Index")</h1>
+<h2>Blob Set Activity</h2>
+    
+<ul class="actions">
+</ul>
+
+@using (Html.BeginForm("BlobSetActivity", "Report", FormMethod.Post, new { id = "pagerForm" }))
+{
+    <div class="reportPane">
+        <div class="reportColumn first">
+            <div>
+                <div class="editor-label">From Date</div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.FromDate)
+                    @Html.ValidationMessageFor(m =>m.FromDate)
+                </div>
+                <div class="editor-label">To Date</div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.ToDate)
+                    @Html.ValidationMessageFor(m =>m.ToDate)
+                </div>
+            </div>
+        </div>
+        <div class="reportColumn">
+            <div>
+                <div class="editor-label">Blob Set</div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.SelectedBlobSetName)
+                    @Html.ValidationMessageFor(m => m.SelectedBlobSetName)
+                </div>
+                <div class="submit">
+                    @Html.HiddenFor(m => m.CurrentPage, new { @id = "currentPage" })
+                    <input type="submit" value="Generate" />
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+}
+<br />
+<br />
+@if (Model != null && Model.BlobSetEvents != null && Model.TotalPages > 0)
+{
+    <div class="report grid">
+    <table>
+        <thead>
+        <tr>
+            <th>Date/Time</th>
+            <th>Blob Set</th>
+            <th>User</th>
+            <th>URL</th>
+            <th>Remote Machine</th>
+            <th>User Agent</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var blobEvent in Model.BlobSetEvents)
+        {
+            <tr>
+                <td>@DateTimeHelper.ToLocalTime(blobEvent.EventDateTime)</td>
+                <td>@blobEvent.BlobSet.Name</td>
+                <td>@blobEvent.User.Name</td>
+                <td>@blobEvent.Url</td>
+                <td>@blobEvent.RemoteMachine</td>
+                <td>@blobEvent.UserAgent</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
+    <div class="pager">
+        @if (Model.CurrentPage <= 1) {
+            <span class="selected">«</span>
+        } else {
+            <a href="javascript:void(0)" onclick="gotoPage(@(Model.CurrentPage - 1))"><span>«</span></a>
+        }
+        
+        @for (var i = 1; i <= Model.TotalPages; i++) {
+            <span class="sepa"> | </span>
+            if (Model.CurrentPage == i) {
+                <span class="selected"><@i></span>
+            } else {
+                <a href="javascript:void(0)" onclick="gotoPage(@i)"><span><@i></span></a>
+            }
+        }
+        <span class="sepa"> | </span>
+        @if (Model.CurrentPage == Model.TotalPages) {
+            <span class="selected">»</span>
+        } else {
+            <a href="javascript:void(0)" onclick="gotoPage(@(Model.CurrentPage + 1))"><span>»</span></a>
+        }
+    </div>
+} else {
+    <div class="empty">No entries found.</div>
+}
+
+@section StylesContent {
+    <link href="@Url.Content("~/Content/styles/jquery-ui-1.8.10.custom.css")" type="text/css" rel="stylesheet" />
+    <script src="@Url.Content("~/Content/scripts/jquery-ui-1.8.10.custom.min.js")"></script>
+}
+
+<script>
+    $(function () {
+        $("#SelectedBlobSetName").autocomplete({
+            source: "/BlobSet/ResourceSearch"
+        });
+    });
+
+    function gotoPage(page) {
+        if (page) { $("#currentPage").val(page); }
+        document.forms["pagerForm"].submit();
+    }
+</script>

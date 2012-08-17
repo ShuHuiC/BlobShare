@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <!--Set to true to run the application locally in the compute emulator.-->
+  <UseLocalComputeEmulator>true</UseLocalComputeEmulator>
+  <!--Used to verify the identity of the site administrator who will be 
+      enabled to send invitations and upload files.-->
+  <BootstrapAdministratorSecret>123456</BootstrapAdministratorSecret>
+
+  <Database>
+    <!--Database server name. Specify a SQL Server (e.g. .\SQLEXPRESS) or a SQL Azure 
+        server (e.g. yourserver.database.windows.net). When deploying to Windows Azure, leave blank 
+        to create a new SQL Azure server, in which case its name will be assigned by SQL Azure.-->
+    <ServerName>.\SQLEXPRESS</ServerName>
+    <!--Name of the application database.-->
+    <DatabaseName>BlobShareDataStore</DatabaseName>
+    <!--Name of the database login. Required when using SQL Azure or SQL Server with 
+        SQL authentication.-->
+    <Username></Username>
+    <!--Password of the database login. Required when using SQL Azure or SQL Server with 
+        SQL authentication.-->
+    <Password></Password>
+    <!--Location of a new SQL Azure server. This setting is used only when deploying to Windows 
+        Azure. Leave blank when using an existing server.-->
+    <Location>{SERVER_LOCATION}</Location>
+  </Database>
+
+  <AccessControlService>
+    <!--Name of the ACS namespace created for the application. Use the namespace only, not 
+        the full URL (e.g. blobshare). You need to create the ACS namespace by visiting the 
+        Windows Azure Management Portal.-->
+    <Namespace>blobshareantares</Namespace>
+    <!--Management Service credentials for this Access Control Service namespace. Retrieved from 
+        the ACS Portal, under Management Service | ManagementClient | Symmetric Key | Key.-->
+    <ManagementKey>xfJJO7bbJ8fiLDVpVLlezSg4gGvQFJh0x3qGrU9qUn8=</ManagementKey>
+    <!--Relying party realm. Identifies the relying party to the identity provider. Leave the default
+        value when running in the compute emulator. When deploying to Windows Azure, use the HTTPS endpoint
+        of your hosted service.-->
+    <RelyingPartyRealm>http://localhost:9318/</RelyingPartyRealm>
+    <!-- Set to true to enable Windows Live ID as an identity provider -->
+    <UseWindowsLiveIdentityProvider>true</UseWindowsLiveIdentityProvider>
+    <!-- Set to true to enable Yahoo! as an identity provider -->
+    <UseYahooIdentityProvider>true</UseYahooIdentityProvider>
+    <!-- Set to true to enable Google as an identity provider -->
+    <UseGoogleIdentityProvider>true</UseGoogleIdentityProvider>
+    <!--Set to true to enable Facebook as an identity provider. If Facebook is enabled as an identity 
+        provider, specify the Facebook application name, application ID and secret.
+        see : http://msdn.microsoft.com/en-us/library/gg185919.aspx.-->
+    <UseFacebookIdentityProvider>false</UseFacebookIdentityProvider>
+    <!--Facebook application name. Required if Facebook is enabled as an identity provider.-->
+    <FacebookApplicationName>{APPLICATION_NAME}</FacebookApplicationName>
+    <!--Facebook application application ID. Required if Facebook is enabled as an identity provider.-->
+    <FacebookApplicationId>{APPLICATION_ID}</FacebookApplicationId>
+    <!--Facebook application secret. Required if Facebook is enabled as an identity provider.-->
+    <FacebookSecret>{APPLICATION_SECRET}</FacebookSecret>
+  </AccessControlService>
+
+  <SMTP>
+    <!--Specify the name of the outgoing mail (SMTP) server (e.g smtp.live.com).-->
+    <Host>smtp.live.com</Host>
+    <!--SMTP server port number.-->
+    <Port>25</Port>
+    <!--Logon user name.-->
+    <User>{SMTP_USERNAME}</User>
+    <!--Logon password.-->
+    <Password>{SMTP_PASSWORD}</Password>
+    <!--Name of sender in notification emails.-->
+    <SenderName>Blob Share</SenderName>
+    <!--Address of sender in notification emails.-->
+    <SenderAddress>blobshare@live.com</SenderAddress>
+  </SMTP>
+
+  <!-- Required only if deploying to Windows Azure -->
+  <WindowsAzureStorage>
+    <!--Name of the storage account to use. When executing locally, leave blank to use the 
+        storage emulator. When deploying to Windows Azure, if the specified storage account 
+        does not exist, it will be created.-->
+    <StorageAccountName>{ACCOUNT_NAME}</StorageAccountName>
+    <!--Access Key of the storage account. Leave blank when using the storage emulator
+        or when creating a new storage account.-->
+    <StorageAccountKey>{ACCOUNT_KEY}</StorageAccountKey>
+    <!--Location of a new storage account. This setting is used only when deploying to Windows 
+        Azure and the storage account does not exist and needs to be created. Leave blank when 
+        using the storage emulator or an existing storage account.-->
+    <StorageAccountLocation>{ACCOUNT_LOCATION}</StorageAccountLocation>    
+    <!--Specify a label when creating a new storage account.-->
+    <StorageAccountLabel>{ACCOUNT_LABEL}</StorageAccountLabel>
+  </WindowsAzureStorage>
+
+</Configuration>

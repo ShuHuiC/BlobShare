@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Microsoft.Samples.DPE.BlobShare.Web.Models.BlobViewModel>
+
+@{
+    ViewBag.Title = "Blob Share | Blobs";
+}
+
+<h1>Blobs</h1>
+
+<ul class="actions">
+    <li>@Html.ActionLink("Upload", "Upload", null, new { @class = "btn upload" })</li>
+</ul>
+
+@if (this.Model.Count() > 0) {
+    <div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Original File Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in this.Model) {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Details", new { id = item.BlobId })
+                </td>
+                <td>
+                    @item.OriginalFileName
+                </td>
+                <td>
+                    @Html.ActionLink("Download", "Download", new { id = item.BlobId }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BlobId }, new { @onclick = "return confirm('Are you sure you want to permanently delete this blob?')" })
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
+} 
+else
+{
+    <div class="empty">You don't have any blobs linked to your account.</div>
+}

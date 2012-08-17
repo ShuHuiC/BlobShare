@@ -1,0 +1,153 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.BlobUploadModel
+@{
+    ViewBag.Title = "Blob Share | Upload Blob";
+}
+
+@section StylesContent {
+    <style>
+        #selector { list-style: none; }
+        #selector li {
+            width: 49%; display: inline-block; padding: 0; margin: 0;
+            text-align: center;
+            }
+            #selector li a { font-weight: bold; font-size: 1.5em; }
+        
+        /* hide panels by default */
+        .uploadPanel { display: none; padding-top: 15px; margin-top: 15px; border-top: 1px solid #eee; }
+        
+       #single { text-align: center; }
+       #single form { text-align: left; width: 810px; margin: auto; }
+       #single textarea { height: 90px; }
+    </style>
+    <link href="../../Content/styles/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
+}
+
+<h1>@Html.ActionLink("Blobs", "Index") </h1>
+<h2>Upload</h2>
+
+<div id="dialog" title="Error">
+<p>@Model.Message </p>
+</div>
+
+<ul id="selector">
+    <li><a href="#single">Single file upload</a><br />(ideal for smaller uploads)</li>
+    <li><a href="#multi">Multiple file upload</a><br />(recommended for larger uploads)</li>
+</ul>
+
+<div id="single" class="uploadPanel">
+    @using (Html.BeginForm("Upload", "Blob", FormMethod.Post, new { enctype = "multipart/form-data"})) { 
+    <div class="form">
+        <div class="left-box">
+            <div class="editor-label">Title</div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="editor-label">File</div>
+            <div class="editor-field">
+                <input type="file" name="ContentFile" /><br />
+                @Html.ValidationMessageFor(m => m.ContentFile)
+            </div>
+        </div>
+        <div class="left-box">
+            <div class="editor-label">Description</div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.Description, new { style = "width:400px;" })
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+        </div>
+        <div class="submit clear">
+            <input type="submit" value="Upload" />
+        </div>
+    </div>
+    } 
+</div>
+
+<div id="multi" class="uploadPanel">
+    <div id="silverlightControlHost" style="display:none;">
+		<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="100%" height="400px">
+			<param name="source" value="@Url.Content("~/Content/FileUpload.xap")" />
+			<param name="onerror" value="onSilverlightError" />
+			<param name="Background" value="#00FFFFFF" /> 
+            <param name="WindowLess" value="true" />
+			<param name="minRuntimeVersion" value="2.0.31005.0" />
+			<param name="autoUpgrade" value="true" />
+            <param name="initParams" value="UploadPage=@Url.Encode(this.Model.UploadHandler),AllowThumbnail=false,UploadChunkSize=0,MaximumTotalUpload=-1,MaximumUpload=-1,MaxConcurrentUploads=2,ResizeImage=false,ImageSize=300,Multiselect=true,JavascriptCompleteFunction=UploadComplete,MaxNumberToUpload=-1,Filter=All Files|*.*" />
+			<a href="http://go.microsoft.com/fwlink/?LinkID=124807" style="text-decoration: none;">
+     			<img src="http://go.microsoft.com/fwlink/?LinkId=108181" alt="Get Microsoft Silverlight" style="border-style: none"/>
+			</a>
+		</object>
+		<iframe style='visibility:hidden;height:0;width:0;border:0px'></iframe>
+    </div>
+    <div id="jsreq">
+        <span>JavaScript is required, please enable it and reload the page.</span>
+    </div>
+</div>
+
+<script>        document.getElementById("jsreq").style.display = 'none'</script>
+<script>        document.getElementById("silverlightControlHost").style.display = 'block'</script>
+<script src="@Url.Content("~/Content/scripts/jquery-1.4.4.min.js")"></script>
+<script src="@Url.Content("~/Content/scripts/jquery-ui-1.8.10.custom.min.js")"></script>
+<script src="@Url.Content("~/Content/scripts/Silverlight.js")"></script>
+<script>
+
+    var uploadWasValid = @(ViewContext.ViewData.ModelState.IsValid ? "true" : "false");
+
+    @if (!String.IsNullOrWhiteSpace(Model.Message)) { 
+	    <text>
+            $(document).ready(function () {
+	        $(function () {
+		        $( "#dialog" ).dialog({
+			        resizable: false,
+			        modal: true,
+                    close: function(event, ui) { document.location = "Upload"; }
+		        });
+	        });
+		});
+        </text>
+    }
+
+    $(function () {
+        $("#selector a").click(function () {
+            var elId = this.href.split('#')[1];
+            $(".uploadPanel").hide();
+            $("#" + elId).show();
+        });
+            
+        if(!uploadWasValid) $("#single").show();
+        if(location.hash) $(location.hash).show();
+    });
+
+    function UploadComplete() {}
+
+    function onSilverlightError(sender, args) 
+    {
+        var appSource = "";
+        if (sender != null && sender != 0) {
+            appSource = sender.getHost().Source;
+        }
+        var errorType = args.ErrorType;
+        var iErrorCode = args.ErrorCode;
+
+        var errMsg = "Unhandled Error in Silverlight Application " + appSource + "\n";
+
+        errMsg += "Code: " + iErrorCode + "    \n";
+        errMsg += "Category: " + errorType + "       \n";
+        errMsg += "Message: " + args.ErrorMessage + "     \n";
+
+        if (errorType == "ParserError") {
+            errMsg += "File: " + args.xamlFile + "     \n";
+            errMsg += "Line: " + args.lineNumber + "     \n";
+            errMsg += "Position: " + args.charPosition + "     \n";
+        }
+        else if (errorType == "RuntimeError") {
+            if (args.lineNumber != 0) {
+                errMsg += "Line: " + args.lineNumber + "     \n";
+                errMsg += "Position: " + args.charPosition + "     \n";
+            }
+            errMsg += "MethodName: " + args.methodName + "     \n";
+        }
+
+        throw new Error(errMsg);
+    }
+</script>

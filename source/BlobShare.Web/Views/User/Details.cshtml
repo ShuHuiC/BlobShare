@@ -1,0 +1,117 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.UserViewModel
+@{
+    ViewBag.Title = "Blob Share | User Details";
+}
+
+<h1>@Html.ActionLink("Users", "Index")</h1>
+<h2>@Model.User.Name</h2>
+
+<div class="accountActions">
+    @if (Model.User.Inactive) {
+        using (Html.BeginForm("Activate", "User", FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to activate this account?')" })) {
+            <input type="submit" value="Activate Account" />
+            @Html.Hidden("id", Model.User.UserId)
+        }
+    } else {
+        using(Html.BeginForm("Deactivate", "User", FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to deactivate this account?')" })) {
+            <input type="submit" value="Deactivate Account" />
+            @Html.Hidden("id", Model.User.UserId)
+        }
+    }
+</div>
+    
+@{
+    var activatedInvitation = Model.User.Invitations.LastOrDefault(i => i.ActivationDateTime != null);
+}
+
+<ul class="actions">
+    @if (!Model.IsMe) 
+    {
+        <li>@Html.ActionLink("Delete", "Delete", new { id = Model.User.UserId }, new { @class = "btn delete", onclick = "return confirm('Are you sure you want to permanently delete this user?')" })</li>
+    }
+    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.User.UserId }, new { @class = "btn edit" })</li>
+    @if (activatedInvitation == null)
+    {
+        <li>@Html.ActionLink("Resend Invitation", "Invite", new { id = Model.User.UserId }, new { @class = "btn invitations" })</li>
+    }
+    <li>@Html.ActionLink("New User", "Create", null, new { @class = "btn add" })</li>
+</ul>
+
+<dl style="margin-top:8px;">
+    <dt>Email</dt>
+    <dd>@Model.User.Email</dd>
+    <dt>Identity Provider</dt>
+    <dd>@(string.IsNullOrWhiteSpace(Model.User.IdentityProvider) ? "-" : Model.User.IdentityProvider)</dd>
+    <dt>User Status</dt>
+    <dd>@(Model.User.Inactive ? "Inactive" : "Active")</dd>
+    <dt>Invitation Status</dt>
+    @if (activatedInvitation == null)
+    {
+        <dd>@(Model.User.Invitations.Count == 0 ? "No invitation sent" : "Pending")</dd>
+    }
+    else
+    {
+        <dd>Activated (@activatedInvitation.ActivationDateTime)</dd>
+    }
+    <dt>Name Identifier</dt>
+    <dd>@(string.IsNullOrWhiteSpace(Model.User.NameIdentifier) ? "-" : Model.User.NameIdentifier)</dd>
+</dl>
+
+<h3>Roles</h3>
+
+@using (Html.BeginForm("AddToRole", "User", new { id = Model.User.UserId }))
+{
+    if (Model.Roles != null && Model.Roles.Count() > 0)
+    {
+        <div class="addbox">
+            @Html.DropDownList("SelectedRole", Model.Roles, "(select)")
+            <input type="submit" value="Add" />
+        </div>
+    }
+    else
+    {
+        <div class="addbox">
+            <select disabled="disabled">
+                <option>none</option>
+            </select>
+            <input type="button" value="Add" disabled="disabled" /> No more available Roles
+        </div>
+    }
+}
+    
+@if (Model.User.Roles.Count > 0)
+    {
+    <div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var role in Model.User.Roles)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(role.RoleName, "Details", "Role", new { id = role.RoleId }, null)
+                </td>
+                <td>
+                    @role.Description
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "RemoveFromRole", new { id = this.Model.User.UserId, selectedRole = role.RoleId })
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
+}
+
+@section StylesContent {
+<style>
+    .accountActions { float: left; }
+</style>
+}

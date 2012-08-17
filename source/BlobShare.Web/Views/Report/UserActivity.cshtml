@@ -1,0 +1,157 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.UserActivityViewModel
+
+@{
+    ViewBag.Title = "Blob Share | User Activity";
+}
+
+<h1>@Html.ActionLink("Reports", "Index")</h1>
+<h2>User Activity</h2>
+    
+<ul class="actions">
+</ul>
+
+@using (Html.BeginForm("UserActivity", "Report", FormMethod.Post, new { id = "pagerForm" }))
+{    
+     @Html.ValidationSummary(false, "Error summary:")
+    <div class="reportPane">
+        <div class="reportColumn first">
+            <div>
+                <div class="editor-label">From Date</div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.FromDate)
+                    @Html.ValidationMessageFor(m => m.FromDate)
+                </div>
+                <div class="editor-label">To Date</div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.ToDate)
+                    @Html.ValidationMessageFor(m => m.ToDate)
+                </div>
+            </div>
+        </div>
+        <div class="reportColumn">
+            <div>
+                <div class="editor-label">Events</div>
+                <div class="editor-field">
+                    @Html.CheckBoxFor(m => m.LoginEvent) User Logged In <br />
+                    @Html.CheckBoxFor(m => m.CreateUserEvent) User Created <br />
+                    @Html.CheckBoxFor(m => m.ActivateUserEvent) User Activated <br />
+                    @Html.CheckBoxFor(m => m.DeactivateUserEvent) User Deactivated<br />
+                    @Html.CheckBoxFor(m => m.ViewResourceEvent) Blob Viewed<br />
+                    @Html.CheckBoxFor(m => m.DownloadResourceEvent) Blob Downloaded<br />
+                    @Html.CheckBoxFor(m => m.ViewSetEvent) Blob Set Viewed
+                </div>
+            </div>
+        </div>
+        <div class="reportColumn">
+            <div>
+                <div class="editor-label">User</div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.SelectedUserName)
+                </div>
+                <div class="submit">
+                    @Html.HiddenFor(m => m.CurrentPage, new { @id = "currentPage" })
+                    <input type="submit" value="Generate" />
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+}
+<br />
+<br />
+@if (Model.GenericEvents != null && Model.GenericEvents.Count() > 0)
+{
+    <div class="report grid">
+    <table>
+        <thead>
+        <tr>
+            <th>Date/Time</th>
+            <th>User</th>
+            <th>Item</th>
+            <th>URL</th>
+            <th>Remote Machine</th>
+            <th>User Agent</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var blobEvent in Model.GenericEvents)
+        {
+            <tr>
+                <td>@DateTimeHelper.ToLocalTime(blobEvent.EventDateTime)</td>
+                <td>@blobEvent.User.Name</td>
+                <td>
+                    @if (blobEvent.Blob != null)
+                    { @blobEvent.Blob.Name }
+                    @if (blobEvent.BlobSet != null)
+                    { @blobEvent.BlobSet.Name }
+                    @if (blobEvent.BlobSet == null && blobEvent.Blob == null)
+                    { <text>-</text> }
+                </td>
+                <td>@blobEvent.Url</td>
+                <td>@blobEvent.RemoteMachine</td>
+                <td>@blobEvent.UserAgent</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
+
+        if (Model.TotalPages > 0)
+        {
+        <div class="pager">
+        @if (Model.CurrentPage <= 1)
+        {
+            <span class="selected">«</span>
+        }
+        else
+        {
+            <a href="javascript:void(0)" onclick="gotoPage(@(Model.CurrentPage - 1))"><span>«</span></a>
+        }
+        
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <span class="sepa"> | </span>
+            if (Model.CurrentPage == i)
+            {
+                <span class="selected">@i</span>
+            }
+            else
+            {
+                <a href="javascript:void(0)" onclick="gotoPage(@i)"><span>@i</span></a>
+            }
+        }
+        <span class="sepa"> | </span>
+        @if (Model.CurrentPage == Model.TotalPages)
+        {
+            <span class="selected">»</span>
+        }
+        else
+        {
+            <a href="javascript:void(0)" onclick="gotoPage(@(Model.CurrentPage + 1))"><span>»</span></a>
+        }
+    </div>
+        }
+}
+else
+{
+    <div class="empty">No entries found.</div>
+}
+
+
+@section StylesContent {
+    <link href="@Url.Content("~/Content/styles/jquery-ui-1.8.10.custom.css")" type="text/css" rel="stylesheet" />
+    <script src="@Url.Content("~/Content/scripts/jquery-ui-1.8.10.custom.min.js")"></script>
+}
+
+<script>
+    $(function () {
+        $("#SelectedUserName").autocomplete({
+            source: "/User/UserSearch"
+        });
+    });
+
+    function gotoPage(page) {
+        if (page) { $("#currentPage").val(page); }
+        document.forms["pagerForm"].submit();
+    }
+</script>

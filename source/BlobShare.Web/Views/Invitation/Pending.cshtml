@@ -1,0 +1,36 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Blob Share | Pending Invitations";
+}
+
+<h1>Pending Invitations</h1>
+
+<ul class="actions">
+    <li>@Html.ActionLink("All Invitations", "Index", null, new { @class = "btn invitations" })</li>
+</ul>
+    
+<div class="gridContainer">
+    <div id="pendingInvitationsSearch" style="display: none">
+        <label>Filter:  <input type="text" class="searchbox" /></label>
+    </div>
+    <div id="pendingInvitationsEmpty" class="empty" style="display: none">No invitations found.</div>
+    <div id="pendingInvitationsResults" class="grid">Please wait. Loading invitations...</div>
+    <div id="pendingInvitationsPager" class="pager" style="display: none"></div>
+</div>
+
+@section StylesContent {
+    <link href="@Url.Content("~/Content/styles/jquery-ui-1.8.10.custom.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Content/scripts/jquery-1.4.4.min.js")"></script>
+    <script src="@Url.Content("~/Content/scripts/jquery-ui-1.8.10.custom.min.js")"></script>
+}
+
+<script>
+    var url = '@Url.Action("PendingInvitationList")';
+    var pageIdentifier = 'pendingInvitations';
+    var detailsUrl = '@Url.Action("Details", "User")';
+</script>
+<script src="@Url.Content("~/Content/scripts/lib.common.js") "></script>
+<script src="@Url.Content("~/Content/scripts/lib.datagrid.js") "></script>
+<script src="@Url.Content("~/Content/scripts/lib.paginator.js") "></script>
+<script src="@Url.Content("~/Content/scripts/BlobShare.datagrid.js") "></script>
+<script src="@Url.Content("~/Content/scripts/page.invitations.js") "></script>

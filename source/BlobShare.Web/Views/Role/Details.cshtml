@@ -1,0 +1,65 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.RoleViewModel
+@{
+    ViewBag.Title = "Blob Share | Role";
+}
+
+<h1>@Html.ActionLink("Roles", "Index") </h1>
+<h2>@Model.Role.RoleName </h2>
+
+<ul class="actions">
+    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.Role.RoleId }, new { @class = "btn edit" })</li>
+</ul>
+
+<dl>
+    <dt>Description</dt>
+    <dd>@(string.IsNullOrWhiteSpace(Model.Role.Description) ? "-" : Model.Role.Description)</dd>
+</dl>
+
+<h3>Users</h3>
+
+@using (Html.BeginForm("AddToRole", "Role", new { id = this.Model.Role.RoleId }))
+{ 
+    if (Model.Users != null && Model.Users.Count() > 0)
+        { 
+        <div class="addbox">
+            @Html.DropDownList("SelectedUser", Model.Users, "(select)")
+            <input type="submit" value="Add" />
+        </div>
+    }
+        else
+        {
+        <div class="addbox">
+            <select disabled="disabled">
+                <option>none</option>
+            </select>
+            <input type="button" value="Add" disabled="disabled" /> No more available users
+        </div>
+    } 
+} 
+
+@if (Model.Role.Users.Count > 0)
+{ 
+    <div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Model.Role.Users)
+        { 
+            <tr>
+                <td>@Html.ActionLink(user.Name, "Details", "User", new { id = user.UserId }, null)</td>
+                <td>@user.Email</td>
+                <td>@Html.ActionLink("Remove", "RemoveFromRole", new { id = this.Model.Role.RoleId, selectedUser = user.UserId })</td>
+            </tr>
+        } 
+        </tbody>
+    </table>
+    </div>
+} else { 
+    <div class="empty">No Users have been given this role.</div>
+} 

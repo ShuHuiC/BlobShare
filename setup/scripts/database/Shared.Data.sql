@@ -1,0 +1,3 @@
+INSERT [Roles]
+VALUES
+	('1D947D07-2E6E-47B8-B655-916C8E3F4D0B', 'Administrator', '')

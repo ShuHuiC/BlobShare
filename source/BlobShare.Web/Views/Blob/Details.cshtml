@@ -1,0 +1,111 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.BlobViewModel
+@{
+    ViewBag.Title = "Blob Share | Blob";
+}
+
+<h1>@Html.ActionLink("Blobs", "Index")</h1>
+<h2>@Model.Name</h2>
+    
+<ul class="actions">
+    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.BlobId }, new { @class = "btn edit" })</li>
+    <li>@Html.ActionLink("Delete", "Delete", new { id = Model.BlobId }, new { @class = "btn delete", onclick = "return confirm('Are you sure you want to permanently delete this blob?')" })</li>
+    <li>@Html.ActionLink("Download", "Download", new { id = Model.BlobId }, new { @class = "btn download" })</li>
+    <li>@Html.ActionLink("Permissions", "Permissions", new { id = Model.BlobId }, new { @class = "btn permissions" })</li>
+</ul>
+    
+<dl>
+    <dt>Description</dt>
+    <dd>@(string.IsNullOrWhiteSpace(Model.Description) ? "-" : Model.Description)</dd>
+    <dt>Original File Name</dt>
+    <dd>@Model.OriginalFileName</dd>
+    <dt>Private Blob URI</dt>
+    <dd>@Model.Uri</dd>
+</dl>
+
+<h3>Blob Sets</h3>
+
+@using (Html.BeginForm("AddBlobToSet", "Blob", new { id = this.Model.BlobId })) {
+    <div class="addbox">
+        <label for="SelectedBlobSetName">Search</label>
+        <input type="text" id="SelectedBlobSetName" name="SelectedBlobSetName" style="width:700px;"/>
+        <input type="submit" value="Add" />
+    </div>
+}
+    
+@if (Model.BlobSets.Count() > 0) {
+    <div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var list in Model.BlobSets)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(list.Name, "Details", "BlobSet", new { id = list.BlobSetId }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "RemoveFromSet", new { id = this.Model.BlobId, selectedSet = list.BlobSetId })
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
+}
+else
+{
+    <div class="empty">No Blob Sets linked to this blob.</div>
+}
+
+@section StylesContent {
+    <link href="@Url.Content("~/Content/styles/jquery-ui-1.8.10.custom.css")"  type="text/css"  rel="stylesheet" />
+    <script type="text/javascript" src="@Url.Content("~/Content/scripts/jquery-ui-1.8.10.custom.min.js")"></script>
+}
+
+<script type="text/javascript">
+    $(function () {
+
+        function split(val) {
+            return val.split(/,\s*/);
+        }
+        function extractLast(term) {
+            return split(term).pop();
+        }
+
+
+        $("#SelectedBlobSetName").autocomplete({
+            source: function (request, response) {
+                $.getJSON("/BlobSet/ResourceSearch", {
+                    term: extractLast(request.term),
+                    maxResults: 15
+                }, response);
+            },
+            search: function () {
+                var term = extractLast(this.value);
+                if (term.length < 2) {
+                    return false;
+                }
+            },
+            focus: function () {
+                // prevent value inserted on focus
+                return false;
+            },
+            select: function (event, ui) {
+                var terms = split(this.value);
+                // remove the current input
+                terms.pop();
+                // add the selected item
+                terms.push(ui.item.value);
+                // add placeholder to get the comma-and-space at the end
+                terms.push("");
+                this.value = terms.join(", ");
+                return false;
+            }
+        });
+    });
+</script>

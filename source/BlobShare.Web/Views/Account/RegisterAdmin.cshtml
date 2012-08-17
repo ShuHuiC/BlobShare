@@ -1,0 +1,54 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.RegisterAdminViewModel
+@{
+    ViewBag.Title = "Blob Share | Register Administrator Account";
+}
+
+<div class="desc">
+    <h1>Account Verification</h1>
+    <p>
+        Please verify your email address and enter the Administrator Secret that was provided when running the offline configuration for Blob Share.
+    </p>
+</div>
+    
+<div class="form" id="accountVerif">
+    @using (Html.BeginForm())
+    {
+        <div class="editor-label">
+            @Html.LabelFor(m => m.AdministratorEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(m => m.AdministratorEmail)
+            @Html.ValidationMessageFor(model => model.AdministratorEmail)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.BootstrapAdministratorSecret)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(m => m.BootstrapAdministratorSecret)
+            @Html.ValidationMessageFor(model => model.BootstrapAdministratorSecret)
+        </div>
+        <div class="submit">
+            <input type="submit" value="Update" />
+        </div>
+    }
+</div>
+<section class="warning">
+    <h1>IMPORTANT!</h1>
+    <p>The account you are currently signed in with will be granted administrator rights to Blob Share. <br />
+        If you want to use a different account proceed to @Html.ActionLink("Sign Out", "LogOff", "Account") from the site and you'll be prompted to sign in again.
+    </p>
+</section>
+
+@section StylesContent {
+<style>
+    #main {
+    }
+    #accountVerif {
+        width: 50%; height: 245px;
+        position: absolute; margin-left: 50%; top: 20px;
+        border-left: 1px dotted #666;
+        padding-left: 20px;
+    }
+    section.warning { margin-top: 100px; }
+</style>
+}

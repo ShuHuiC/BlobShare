@@ -1,0 +1,17 @@
+﻿<nav>
+    <ul>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    @if (Request.IsAuthenticated) {
+        if (this.User.IsInRole("Administrator")) {
+        <li>@Html.ActionLink("Blobs", "Index", "Blob")</li>
+        <li>@Html.ActionLink("Blob Sets", "Index", "BlobSet")</li>
+        <li>@Html.ActionLink("Roles", "Index", "Role")</li>
+        <li>@Html.ActionLink("Users", "Index", "User")</li>
+        <li>@Html.ActionLink("Invitations", "Index", "Invitation")</li>
+        <li>@Html.ActionLink("Reports", "Index", "Report")</li>
+        } else {
+        <li>@Html.ActionLink("My Blobs", "Index", "MyBlobs")</li>
+        }
+    }
+    </ul>
+</nav>

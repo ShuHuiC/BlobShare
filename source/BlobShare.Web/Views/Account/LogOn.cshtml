@@ -1,0 +1,159 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.LogOnViewModel
+@{
+    ViewBag.Title = "Blob Share | Sign In";
+}
+
+<div class="desc">
+    <h1>Sign In</h1>
+    <p>Sign into Blob Share using an existing account.</p>
+</div>
+
+<div id="hrd">
+    <div class="group" >
+        <div id="SignInContent" class="SignInContent" style="display:none;">
+            <div id="IdentityProvidersLoading" class="description">please wait...</div>
+		    <div id="IdentityProviders" class="IdentityProviders">
+			    <ul class="listTasks" id="IdentityProvidersList">
+                </ul>
+		    </div>
+	    </div>
+    </div>
+
+    <div id="jsreq">
+        <span>JavaScript is required, please enable it and reload the page.</span>
+    </div>
+</div>
+
+@section StylesContent {
+<style>
+    h1 { font-size: 57px }
+    #main { height: 400px; }
+    #hrd {
+        height: 400px;
+        position: absolute; margin-left: 50%; top: 20px;
+        border-left: 1px dotted #666;
+        padding-left: 20px;
+        font-size: 22px;
+    }
+    #hrd ul { margin: 40px 0 0 0; list-style: none; }
+    #hrd ul li { margin: 20px 0; }
+    #userInfo { display: none; }
+</style>
+}
+
+<script>        document.getElementById("jsreq").style.display = 'none'</script>
+<script>        document.getElementById("SignInContent").style.display = 'block'</script>
+<script>
+    var identityProviders = [];
+    var maxImageWidth = 240;
+    var maxImageHeight = 40;
+
+    // This function will be called back by the HRD metadata, and is responsible for displaying the sign-in page.
+    function ShowSigninPage(json) {
+        var numIdentityProviderButtons = 0;
+        identityProviders = json;
+
+        if (identityProviders.length == 0) {
+            var mainDiv = document.getElementById("SignInContent");
+            mainDiv.appendChild(document.createElement("br"));
+            mainDiv.appendChild(document.createTextNode("Error: No identity providers are associated with this application."));
+        }
+
+        // Loop through the identity providers
+        for (var i in identityProviders) {
+            // Show all sign-in options
+            CreateIdentityProviderButton(identityProviders[i]);
+            numIdentityProviderButtons++;
+        }
+
+        ShowDefaultSigninPage();
+
+        document.getElementById("IdentityProvidersLoading").style.display = "none";
+    }
+
+    // Resets the sign-in page to its original state before the user logged in.
+    function ShowDefaultSigninPage() {
+        var numIdentityProviderButtons = 0;
+        document.getElementById("IdentityProvidersList").innerHTML = "";
+        for (var i in identityProviders) {
+            CreateIdentityProviderButton(identityProviders[i]);
+            numIdentityProviderButtons++;
+        }
+
+        ShowSigninControls(numIdentityProviderButtons);
+    }
+
+    // Reveals the sign-in controls on the sign-in page, and ensures they are sized correctly
+    function ShowSigninControls(numIdentityProviderButtons) {
+
+        // Display the identity provider links, and size the page accordingly
+        if (numIdentityProviderButtons > 0) {
+            document.getElementById("IdentityProviders").style.display = "";
+            if (numIdentityProviderButtons > 4) {
+                var height = 325 + ((numIdentityProviderButtons - 4) * 55);
+                document.getElementById("SignInContent").style.height = height + "px";
+            }
+        }
+    }
+
+    // Creates a stylized link to an identity provider's login page
+    function CreateIdentityProviderButton(identityProvider) {
+        var idpList = document.getElementById("IdentityProvidersList");
+        var li = document.createElement("li");
+
+        // Display an image if an image URL is present
+        if (identityProvider.ImageUrl.length > 0) {
+            li.className = "identityProviderLogo";
+
+            var link = document.createElement("a");
+            link.setAttribute("href", identityProvider.LoginUrl);
+
+            var img = document.createElement("img");
+            img.className = "IdentityProviderImage";
+            img.setAttribute("src", identityProvider.ImageUrl);
+            img.setAttribute("alt", identityProvider.Name);
+            img.setAttribute("border", "0");
+            img.onLoad = ResizeImage(img);
+
+            link.appendChild(img);
+            li.appendChild(link);
+        }
+        // Otherwise, display a text link if no image URL is present
+        else {
+            li.className = "list";
+
+            var p = document.createElement("p");
+            var link = document.createElement("a");
+
+            link.className = "title";
+            link.appendChild(document.createTextNode(identityProvider.Name));
+            link.setAttribute("href", identityProvider.LoginUrl);
+
+            p.appendChild(link);
+            li.appendChild(p);
+        }
+
+        idpList.appendChild(li);
+    }
+
+    function ResizeImage(img) {
+        if (img.height > maxImageHeight || img.width > maxImageWidth) {
+            var resizeRatio = 1;
+
+            if (img.width / img.height > maxImageWidth / maxImageHeight) {
+                // Aspect ratio wider than the button
+                resizeRatio = maxImageWidth / img.width;
+            }
+            else {
+                // Aspect ratio taller than or equal to the button
+                resizeRatio = maxImageHeight / img.height;
+            }
+
+            img.setAttribute("height", img.height * resizeRatio);
+            img.setAttribute("width", img.width * resizeRatio);
+        }
+    }
+
+</script>
+<!-- This script gets the HRD metadata in JSON and calls the callback function which renders the links -->
+<script src="https://@this.Model.AcsNamespace:443/v2/metadata/IdentityProviders.js?protocol=wsfederation&realm=@this.Model.Realm&reply_to=@this.Model.ReplayTo&context=@this.Model.Context&version=1.0&callback=ShowSigninPage"></script>

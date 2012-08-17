@@ -1,0 +1,19 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Blob Share | Error";
+}
+
+<h2>
+    Oops! that shouldn't have happened.
+</h2>
+    
+@{
+    var exception = Model.Exception;
+    if (exception != null) {        
+    <h3>@exception.Message</h3>
+    <p>
+        @exception.ToString()
+    </p>
+    }
+}

@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BlobShareDataStoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="BlobShareDataStoreModelStoreContainer">
+          <EntitySet Name="BlobEvents" EntityType="BlobShareDataStoreModel.Store.BlobEvents" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Blobs" EntityType="BlobShareDataStoreModel.Store.Blobs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BlobSetBlobs" EntityType="BlobShareDataStoreModel.Store.BlobSetBlobs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BlobSetEvents" EntityType="BlobShareDataStoreModel.Store.BlobSetEvents" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BlobSets" EntityType="BlobShareDataStoreModel.Store.BlobSets" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Invitations" EntityType="BlobShareDataStoreModel.Store.Invitations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Permissions" EntityType="BlobShareDataStoreModel.Store.Permissions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RolePermissions" EntityType="BlobShareDataStoreModel.Store.RolePermissions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="BlobShareDataStoreModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserEvents" EntityType="BlobShareDataStoreModel.Store.UserEvents" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserPermissions" EntityType="BlobShareDataStoreModel.Store.UserPermissions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="BlobShareDataStoreModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UsersRoles" EntityType="BlobShareDataStoreModel.Store.UsersRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_BlobEvents_Blobs" Association="BlobShareDataStoreModel.Store.FK_BlobEvents_Blobs">
+            <End Role="Blobs" EntitySet="Blobs" />
+            <End Role="BlobEvents" EntitySet="BlobEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlobEvents_Users" Association="BlobShareDataStoreModel.Store.FK_BlobEvents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BlobEvents" EntitySet="BlobEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlobSetBlobs_Blobs" Association="BlobShareDataStoreModel.Store.FK_BlobSetBlobs_Blobs">
+            <End Role="Blobs" EntitySet="Blobs" />
+            <End Role="BlobSetBlobs" EntitySet="BlobSetBlobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlobSetBlobs_BlobSets" Association="BlobShareDataStoreModel.Store.FK_BlobSetBlobs_BlobSets">
+            <End Role="BlobSets" EntitySet="BlobSets" />
+            <End Role="BlobSetBlobs" EntitySet="BlobSetBlobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlobSetEvents_BlobSets" Association="BlobShareDataStoreModel.Store.FK_BlobSetEvents_BlobSets">
+            <End Role="BlobSets" EntitySet="BlobSets" />
+            <End Role="BlobSetEvents" EntitySet="BlobSetEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlobSetEvents_Users" Association="BlobShareDataStoreModel.Store.FK_BlobSetEvents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BlobSetEvents" EntitySet="BlobSetEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invitations_Users" Association="BlobShareDataStoreModel.Store.FK_Invitations_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Invitations" EntitySet="Invitations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permissions_Blobs" Association="BlobShareDataStoreModel.Store.FK_Permissions_Blobs">
+            <End Role="Blobs" EntitySet="Blobs" />
+            <End Role="Permissions" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permissions_BlobSets" Association="BlobShareDataStoreModel.Store.FK_Permissions_BlobSets">
+            <End Role="BlobSets" EntitySet="BlobSets" />
+            <End Role="Permissions" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Permissions" Association="BlobShareDataStoreModel.Store.FK_RolePermissions_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Roles" Association="BlobShareDataStoreModel.Store.FK_RolePermissions_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEvents_Users" Association="BlobShareDataStoreModel.Store.FK_UserEvents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserEvents" EntitySet="UserEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions_Permissions" Association="BlobShareDataStoreModel.Store.FK_UserPermissions_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions_Users" Association="BlobShareDataStoreModel.Store.FK_UserPermissions_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersRoles_Roles" Association="BlobShareDataStoreModel.Store.FK_UsersRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UsersRoles" EntitySet="UsersRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersRoles_Users" Association="BlobShareDataStoreModel.Store.FK_UsersRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersRoles" EntitySet="UsersRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BlobEvents">
+          <Key>
+            <PropertyRef Name="BlobEventId" />
+          </Key>
+          <Property Name="BlobEventId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BlobId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventType" Type="int" Nullable="false" />
+          <Property Name="EventDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserAgent" Type="nvarchar(max)" />
+          <Property Name="RemoteMachine" Type="nvarchar" MaxLength="100" />
+          <Property Name="SessionId" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Blobs">
+          <Key>
+            <PropertyRef Name="BlobId" />
+          </Key>
+          <Property Name="BlobId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="OriginalFileName" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="UploadDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlobSetBlobs">
+          <Key>
+            <PropertyRef Name="BlobSetId" />
+            <PropertyRef Name="BlobId" />
+          </Key>
+          <Property Name="BlobSetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BlobId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlobSetEvents">
+          <Key>
+            <PropertyRef Name="BlobSetEventId" />
+          </Key>
+          <Property Name="BlobSetEventId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BlobSetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventType" Type="int" Nullable="false" />
+          <Property Name="EventDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserAgent" Type="nvarchar(max)" />
+          <Property Name="RemoteMachine" Type="nvarchar" MaxLength="100" />
+          <Property Name="SessionId" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="BlobSets">
+          <Key>
+            <PropertyRef Name="BlobSetId" />
+          </Key>
+          <Property Name="BlobSetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ParentBlobSetId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Invitations">
+          <Key>
+            <PropertyRef Name="InvitationId" />
+          </Key>
+          <Property Name="InvitationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Privilege" Type="int" Nullable="false" />
+          <Property Name="CreationDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDateTime" Type="datetime" Nullable="false" />
+          <Property Name="SentDateTime" Type="datetime" />
+          <Property Name="ActivationDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="PermissionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BlobId" Type="uniqueidentifier" />
+          <Property Name="BlobSetId" Type="uniqueidentifier" />
+          <Property Name="CreationDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Privilege" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolePermissions">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PermissionId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="UserEvents">
+          <Key>
+            <PropertyRef Name="UserEventId" />
+          </Key>
+          <Property Name="UserEventId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventType" Type="int" Nullable="false" />
+          <Property Name="EventDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserAgent" Type="nvarchar(max)" />
+          <Property Name="RemoteMachine" Type="nvarchar" MaxLength="100" />
+          <Property Name="SessionId" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UserPermissions">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PermissionId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="IdentityProvider" Type="nvarchar" MaxLength="128" />
+          <Property Name="NameIdentifier" Type="nvarchar" MaxLength="256" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BlobEvents_Blobs">
+          <End Role="Blobs" Type="BlobShareDataStoreModel.Store.Blobs" Multiplicity="1" />
+          <End Role="BlobEvents" Type="BlobShareDataStoreModel.Store.BlobEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blobs">
+              <PropertyRef Name="BlobId" />
+            </Principal>
+            <Dependent Role="BlobEvents">
+              <PropertyRef Name="BlobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlobEvents_Users">
+          <End Role="Users" Type="BlobShareDataStoreModel.Store.Users" Multiplicity="1" />
+          <End Role="BlobEvents" Type="BlobShareDataStoreModel.Store.BlobEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BlobEvents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlobSetBlobs_Blobs">
+          <End Role="Blobs" Type="BlobShareDataStoreModel.Store.Blobs" Multiplicity="1" />
+          <End Role="BlobSetBlobs" Type="BlobShareDataStoreModel.Store.BlobSetBlobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blobs">
+              <PropertyRef Name="BlobId" />
+            </Principal>
+            <Dependent Role="BlobSetBlobs">
+              <PropertyRef Name="BlobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlobSetBlobs_BlobSets">
+          <End Role="BlobSets" Type="BlobShareDataStoreModel.Store.BlobSets" Multiplicity="1" />
+          <End Role="BlobSetBlobs" Type="BlobShareDataStoreModel.Store.BlobSetBlobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlobSets">
+              <PropertyRef Name="BlobSetId" />
+            </Principal>
+            <Dependent Role="BlobSetBlobs">
+              <PropertyRef Name="BlobSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlobSetEvents_BlobSets">
+          <End Role="BlobSets" Type="BlobShareDataStoreModel.Store.BlobSets" Multiplicity="1" />
+          <End Role="BlobSetEvents" Type="BlobShareDataStoreModel.Store.BlobSetEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlobSets">
+              <PropertyRef Name="BlobSetId" />
+            </Principal>
+            <Dependent Role="BlobSetEvents">
+              <PropertyRef Name="BlobSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlobSetEvents_Users">
+          <End Role="Users" Type="BlobShareDataStoreModel.Store.Users" Multiplicity="1" />
+          <End Role="BlobSetEvents" Type="BlobShareDataStoreModel.Store.BlobSetEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BlobSetEvents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invitations_Users">
+          <End Role="Users" Type="BlobShareDataStoreModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Invitations" Type="BlobShareDataStoreModel.Store.Invitations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Invitations">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permissions_Blobs">
+          <End Role="Blobs" Type="BlobShareDataStoreModel.Store.Blobs" Multiplicity="0..1" />
+          <End Role="Permissions" Type="BlobShareDataStoreModel.Store.Permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blobs">
+              <PropertyRef Name="BlobId" />
+            </Principal>
+            <Dependent Role="Permissions">
+              <PropertyRef Name="BlobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permissions_BlobSets">
+          <End Role="BlobSets" Type="BlobShareDataStoreModel.Store.BlobSets" Multiplicity="0..1" />
+          <End Role="Permissions" Type="BlobShareDataStoreModel.Store.Permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlobSets">
+              <PropertyRef Name="BlobSetId" />
+            </Principal>
+            <Dependent Role="Permissions">
+              <PropertyRef Name="BlobSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Permissions">
+          <End Role="Permissions" Type="BlobShareDataStoreModel.Store.Permissions" Multiplicity="1" />
+          <End Role="RolePermissions" Type="BlobShareDataStoreModel.Store.RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="PermissionId" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Roles">
+          <End Role="Roles" Type="BlobShareDataStoreModel.Store.Roles" Multiplicity="1" />
+          <End Role="RolePermissions" Type="BlobShareDataStoreModel.Store.RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEvents_Users">
+          <End Role="Users" Type="BlobShareDataStoreModel.Store.Users" Multiplicity="1" />
+          <End Role="UserEvents" Type="BlobShareDataStoreModel.Store.UserEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserEvents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPermissions_Permissions">
+          <End Role="Permissions" Type="BlobShareDataStoreModel.Store.Permissions" Multiplicity="1" />
+          <End Role="UserPermissions" Type="BlobShareDataStoreModel.Store.UserPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="PermissionId" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPermissions_Users">
+          <End Role="Users" Type="BlobShareDataStoreModel.Store.Users" Multiplicity="1" />
+          <End Role="UserPermissions" Type="BlobShareDataStoreModel.Store.UserPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersRoles_Roles">
+          <End Role="Roles" Type="BlobShareDataStoreModel.Store.Roles" Multiplicity="1" />
+          <End Role="UsersRoles" Type="BlobShareDataStoreModel.Store.UsersRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UsersRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersRoles_Users">
+          <End Role="Users" Type="BlobShareDataStoreModel.Store.Users" Multiplicity="1" />
+          <End Role="UsersRoles" Type="BlobShareDataStoreModel.Store.UsersRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UsersRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BlobShareDataStoreModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="BlobShareDataStoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BlobEvents" EntityType="BlobShareDataStoreModel.BlobEvent" />
+          <EntitySet Name="Blobs" EntityType="BlobShareDataStoreModel.Blob" />
+          <EntitySet Name="BlobSetEvents" EntityType="BlobShareDataStoreModel.BlobSetEvent" />
+          <EntitySet Name="BlobSets" EntityType="BlobShareDataStoreModel.BlobSet" />
+          <EntitySet Name="Invitations" EntityType="BlobShareDataStoreModel.Invitation" />
+          <EntitySet Name="Permissions" EntityType="BlobShareDataStoreModel.Permission" />
+          <EntitySet Name="Roles" EntityType="BlobShareDataStoreModel.Role" />
+          <EntitySet Name="UserEvents" EntityType="BlobShareDataStoreModel.UserEvent" />
+          <EntitySet Name="Users" EntityType="BlobShareDataStoreModel.User" />
+          <AssociationSet Name="FK_BlobEvents_Blobs" Association="BlobShareDataStoreModel.FK_BlobEvents_Blobs">
+            <End Role="Blob" EntitySet="Blobs" />
+            <End Role="BlobEvent" EntitySet="BlobEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlobEvents_Users" Association="BlobShareDataStoreModel.FK_BlobEvents_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BlobEvent" EntitySet="BlobEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permissions_Blobs" Association="BlobShareDataStoreModel.FK_Permissions_Blobs">
+            <End Role="Blob" EntitySet="Blobs" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlobSetEvents_BlobSets" Association="BlobShareDataStoreModel.FK_BlobSetEvents_BlobSets">
+            <End Role="BlobSet" EntitySet="BlobSets" />
+            <End Role="BlobSetEvent" EntitySet="BlobSetEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlobSetEvents_Users" Association="BlobShareDataStoreModel.FK_BlobSetEvents_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BlobSetEvent" EntitySet="BlobSetEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permissions_BlobSets" Association="BlobShareDataStoreModel.FK_Permissions_BlobSets">
+            <End Role="BlobSet" EntitySet="BlobSets" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invitations_Users" Association="BlobShareDataStoreModel.FK_Invitations_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Invitation" EntitySet="Invitations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEvents_Users" Association="BlobShareDataStoreModel.FK_UserEvents_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserEvent" EntitySet="UserEvents" />
+          </AssociationSet>
+          <AssociationSet Name="BlobSetBlobs" Association="BlobShareDataStoreModel.BlobSetBlobs">
+            <End Role="Blob" EntitySet="Blobs" />
+            <End Role="BlobSet" EntitySet="BlobSets" />
+          </AssociationSet>
+          <AssociationSet Name="RolePermissions" Association="BlobShareDataStoreModel.RolePermissions">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserPermissions" Association="BlobShareDataStoreModel.UserPermissions">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UsersRoles" Association="BlobShareDataStoreModel.UsersRoles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BlobEvent">
+          <Key>
+            <PropertyRef Name="BlobEventId" />
+          </Key>
+          <Property Type="Guid" Name="BlobEventId" Nullable="false" />
+          <Property Type="Int32" Name="EventType" Nullable="false" />
+          <Property Type="DateTime" Name="EventDateTime" Nullable="false" />
+          <Property Type="String" Name="Url" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserAgent" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RemoteMachine" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SessionId" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Blob" Relationship="BlobShareDataStoreModel.FK_BlobEvents_Blobs" FromRole="BlobEvent" ToRole="Blob" />
+          <NavigationProperty Name="User" Relationship="BlobShareDataStoreModel.FK_BlobEvents_Users" FromRole="BlobEvent" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Blob">
+          <Key>
+            <PropertyRef Name="BlobId" />
+          </Key>
+          <Property Type="Guid" Name="BlobId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OriginalFileName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="UploadDateTime" Nullable="false" />
+          <NavigationProperty Name="BlobEvents" Relationship="BlobShareDataStoreModel.FK_BlobEvents_Blobs" FromRole="Blob" ToRole="BlobEvent" />
+          <NavigationProperty Name="Permissions" Relationship="BlobShareDataStoreModel.FK_Permissions_Blobs" FromRole="Blob" ToRole="Permission" />
+          <NavigationProperty Name="BlobSets" Relationship="BlobShareDataStoreModel.BlobSetBlobs" FromRole="Blob" ToRole="BlobSet" />
+        </EntityType>
+        <EntityType Name="BlobSetEvent">
+          <Key>
+            <PropertyRef Name="BlobSetEventId" />
+          </Key>
+          <Property Type="Guid" Name="BlobSetEventId" Nullable="false" />
+          <Property Type="Int32" Name="EventType" Nullable="false" />
+          <Property Type="DateTime" Name="EventDateTime" Nullable="false" />
+          <Property Type="String" Name="Url" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserAgent" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RemoteMachine" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SessionId" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BlobSet" Relationship="BlobShareDataStoreModel.FK_BlobSetEvents_BlobSets" FromRole="BlobSetEvent" ToRole="BlobSet" />
+          <NavigationProperty Name="User" Relationship="BlobShareDataStoreModel.FK_BlobSetEvents_Users" FromRole="BlobSetEvent" ToRole="User" />
+        </EntityType>
+        <EntityType Name="BlobSet">
+          <Key>
+            <PropertyRef Name="BlobSetId" />
+          </Key>
+          <Property Type="Guid" Name="BlobSetId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="ParentBlobSetId" />
+          <NavigationProperty Name="BlobSetEvents" Relationship="BlobShareDataStoreModel.FK_BlobSetEvents_BlobSets" FromRole="BlobSet" ToRole="BlobSetEvent" />
+          <NavigationProperty Name="Permissions" Relationship="BlobShareDataStoreModel.FK_Permissions_BlobSets" FromRole="BlobSet" ToRole="Permission" />
+          <NavigationProperty Name="Blobs" Relationship="BlobShareDataStoreModel.BlobSetBlobs" FromRole="BlobSet" ToRole="Blob" />
+        </EntityType>
+        <EntityType Name="Invitation">
+          <Key>
+            <PropertyRef Name="InvitationId" />
+          </Key>
+          <Property Type="Guid" Name="InvitationId" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Privilege" Nullable="false" />
+          <Property Type="DateTime" Name="CreationDateTime" Nullable="false" />
+          <Property Type="DateTime" Name="ExpirationDateTime" Nullable="false" />
+          <Property Type="DateTime" Name="SentDateTime" />
+          <Property Type="DateTime" Name="ActivationDateTime" />
+          <NavigationProperty Name="User" Relationship="BlobShareDataStoreModel.FK_Invitations_Users" FromRole="Invitation" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Type="Guid" Name="PermissionId" Nullable="false" />
+          <Property Type="DateTime" Name="CreationDateTime" Nullable="false" />
+          <Property Type="DateTime" Name="ExpirationDateTime" Nullable="false" />
+          <Property Type="Int32" Name="Privilege" Nullable="false" />
+          <NavigationProperty Name="Blob" Relationship="BlobShareDataStoreModel.FK_Permissions_Blobs" FromRole="Permission" ToRole="Blob" />
+          <NavigationProperty Name="BlobSet" Relationship="BlobShareDataStoreModel.FK_Permissions_BlobSets" FromRole="Permission" ToRole="BlobSet" />
+          <NavigationProperty Name="Roles" Relationship="BlobShareDataStoreModel.RolePermissions" FromRole="Permission" ToRole="Role" />
+          <NavigationProperty Name="Users" Relationship="BlobShareDataStoreModel.UserPermissions" FromRole="Permission" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Type="Guid" Name="RoleId" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Permissions" Relationship="BlobShareDataStoreModel.RolePermissions" FromRole="Role" ToRole="Permission" />
+          <NavigationProperty Name="Users" Relationship="BlobShareDataStoreModel.UsersRoles" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserEvent">
+          <Key>
+            <PropertyRef Name="UserEventId" />
+          </Key>
+          <Property Type="Guid" Name="UserEventId" Nullable="false" />
+          <Property Type="Int32" Name="EventType" Nullable="false" />
+          <Property Type="DateTime" Name="EventDateTime" Nullable="false" />
+          <Property Type="String" Name="Url" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserAgent" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RemoteMachine" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SessionId" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="BlobShareDataStoreModel.FK_UserEvents_Users" FromRole="UserEvent" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="IdentityProvider" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NameIdentifier" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Inactive" Nullable="false" />
+          <NavigationProperty Name="BlobEvents" Relationship="BlobShareDataStoreModel.FK_BlobEvents_Users" FromRole="User" ToRole="BlobEvent" />
+          <NavigationProperty Name="BlobSetEvents" Relationship="BlobShareDataStoreModel.FK_BlobSetEvents_Users" FromRole="User" ToRole="BlobSetEvent" />
+          <NavigationProperty Name="Invitations" Relationship="BlobShareDataStoreModel.FK_Invitations_Users" FromRole="User" ToRole="Invitation" />
+          <NavigationProperty Name="UserEvents" Relationship="BlobShareDataStoreModel.FK_UserEvents_Users" FromRole="User" ToRole="UserEvent" />
+          <NavigationProperty Name="Permissions" Relationship="BlobShareDataStoreModel.UserPermissions" FromRole="User" ToRole="Permission" />
+          <NavigationProperty Name="Roles" Relationship="BlobShareDataStoreModel.UsersRoles" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_BlobEvents_Blobs">
+          <End Type="BlobShareDataStoreModel.Blob" Role="Blob" Multiplicity="1" />
+          <End Type="BlobShareDataStoreModel.BlobEvent" Role="BlobEvent" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_BlobEvents_Users">
+          <End Type="BlobShareDataStoreModel.User" Role="User" Multiplicity="1" />
+          <End Type="BlobShareDataStoreModel.BlobEvent" Role="BlobEvent" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Permissions_Blobs">
+          <End Type="BlobShareDataStoreModel.Blob" Role="Blob" Multiplicity="0..1" />
+          <End Type="BlobShareDataStoreModel.Permission" Role="Permission" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_BlobSetEvents_BlobSets">
+          <End Type="BlobShareDataStoreModel.BlobSet" Role="BlobSet" Multiplicity="1" />
+          <End Type="BlobShareDataStoreModel.BlobSetEvent" Role="BlobSetEvent" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_BlobSetEvents_Users">
+          <End Type="BlobShareDataStoreModel.User" Role="User" Multiplicity="1" />
+          <End Type="BlobShareDataStoreModel.BlobSetEvent" Role="BlobSetEvent" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Permissions_BlobSets">
+          <End Type="BlobShareDataStoreModel.BlobSet" Role="BlobSet" Multiplicity="0..1" />
+          <End Type="BlobShareDataStoreModel.Permission" Role="Permission" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Invitations_Users">
+          <End Type="BlobShareDataStoreModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="BlobShareDataStoreModel.Invitation" Role="Invitation" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_UserEvents_Users">
+          <End Type="BlobShareDataStoreModel.User" Role="User" Multiplicity="1" />
+          <End Type="BlobShareDataStoreModel.UserEvent" Role="UserEvent" Multiplicity="*" />
+        </Association>
+        <Association Name="BlobSetBlobs">
+          <End Type="BlobShareDataStoreModel.Blob" Role="Blob" Multiplicity="*" />
+          <End Type="BlobShareDataStoreModel.BlobSet" Role="BlobSet" Multiplicity="*" />
+        </Association>
+        <Association Name="RolePermissions">
+          <End Type="BlobShareDataStoreModel.Permission" Role="Permission" Multiplicity="*" />
+          <End Type="BlobShareDataStoreModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        <Association Name="UserPermissions">
+          <End Type="BlobShareDataStoreModel.Permission" Role="Permission" Multiplicity="*" />
+          <End Type="BlobShareDataStoreModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        <Association Name="UsersRoles">
+          <End Type="BlobShareDataStoreModel.Role" Role="Role" Multiplicity="*" />
+          <End Type="BlobShareDataStoreModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BlobShareDataStoreModelStoreContainer" CdmEntityContainer="BlobShareDataStoreEntities">
+          <EntitySetMapping Name="BlobEvents">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.BlobEvent">
+              <MappingFragment StoreEntitySet="BlobEvents">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="RemoteMachine" ColumnName="RemoteMachine" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="BlobEventId" ColumnName="BlobEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blobs">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.Blob">
+              <MappingFragment StoreEntitySet="Blobs">
+                <ScalarProperty Name="UploadDateTime" ColumnName="UploadDateTime" />
+                <ScalarProperty Name="OriginalFileName" ColumnName="OriginalFileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BlobId" ColumnName="BlobId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlobSetEvents">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.BlobSetEvent">
+              <MappingFragment StoreEntitySet="BlobSetEvents">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="RemoteMachine" ColumnName="RemoteMachine" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="BlobSetEventId" ColumnName="BlobSetEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlobSets">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.BlobSet">
+              <MappingFragment StoreEntitySet="BlobSets">
+                <ScalarProperty Name="ParentBlobSetId" ColumnName="ParentBlobSetId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BlobSetId" ColumnName="BlobSetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invitations">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.Invitation">
+              <MappingFragment StoreEntitySet="Invitations">
+                <ScalarProperty Name="ActivationDateTime" ColumnName="ActivationDateTime" />
+                <ScalarProperty Name="SentDateTime" ColumnName="SentDateTime" />
+                <ScalarProperty Name="ExpirationDateTime" ColumnName="ExpirationDateTime" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="Privilege" ColumnName="Privilege" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="InvitationId" ColumnName="InvitationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="Privilege" ColumnName="Privilege" />
+                <ScalarProperty Name="ExpirationDateTime" ColumnName="ExpirationDateTime" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEvents">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.UserEvent">
+              <MappingFragment StoreEntitySet="UserEvents">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="RemoteMachine" ColumnName="RemoteMachine" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="UserEventId" ColumnName="UserEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BlobShareDataStoreModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+                <ScalarProperty Name="NameIdentifier" ColumnName="NameIdentifier" />
+                <ScalarProperty Name="IdentityProvider" ColumnName="IdentityProvider" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_BlobEvents_Blobs" TypeName="BlobShareDataStoreModel.FK_BlobEvents_Blobs" StoreEntitySet="BlobEvents">
+            <EndProperty Name="BlobEvent">
+              <ScalarProperty Name="BlobEventId" ColumnName="BlobEventId" />
+            </EndProperty>
+            <EndProperty Name="Blob">
+              <ScalarProperty Name="BlobId" ColumnName="BlobId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_BlobEvents_Users" TypeName="BlobShareDataStoreModel.FK_BlobEvents_Users" StoreEntitySet="BlobEvents">
+            <EndProperty Name="BlobEvent">
+              <ScalarProperty Name="BlobEventId" ColumnName="BlobEventId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Permissions_Blobs" TypeName="BlobShareDataStoreModel.FK_Permissions_Blobs" StoreEntitySet="Permissions">
+            <EndProperty Name="Permission">
+              <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+            </EndProperty>
+            <EndProperty Name="Blob">
+              <ScalarProperty Name="BlobId" ColumnName="BlobId" />
+            </EndProperty>
+            <Condition ColumnName="BlobId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_BlobSetEvents_BlobSets" TypeName="BlobShareDataStoreModel.FK_BlobSetEvents_BlobSets" StoreEntitySet="BlobSetEvents">
+            <EndProperty Name="BlobSetEvent">
+              <ScalarProperty Name="BlobSetEventId" ColumnName="BlobSetEventId" />
+            </EndProperty>
+            <EndProperty Name="BlobSet">
+              <ScalarProperty Name="BlobSetId" ColumnName="BlobSetId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_BlobSetEvents_Users" TypeName="BlobShareDataStoreModel.FK_BlobSetEvents_Users" StoreEntitySet="BlobSetEvents">
+            <EndProperty Name="BlobSetEvent">
+              <ScalarProperty Name="BlobSetEventId" ColumnName="BlobSetEventId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Permissions_BlobSets" TypeName="BlobShareDataStoreModel.FK_Permissions_BlobSets" StoreEntitySet="Permissions">
+            <EndProperty Name="Permission">
+              <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+            </EndProperty>
+            <EndProperty Name="BlobSet">
+              <ScalarProperty Name="BlobSetId" ColumnName="BlobSetId" />
+            </EndProperty>
+            <Condition ColumnName="BlobSetId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Invitations_Users" TypeName="BlobShareDataStoreModel.FK_Invitations_Users" StoreEntitySet="Invitations">
+            <EndProperty Name="Invitation">
+              <ScalarProperty Name="InvitationId" ColumnName="InvitationId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <Condition ColumnName="UserId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_UserEvents_Users" TypeName="BlobShareDataStoreModel.FK_UserEvents_Users" StoreEntitySet="UserEvents">
+            <EndProperty Name="UserEvent">
+              <ScalarProperty Name="UserEventId" ColumnName="UserEventId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="BlobSetBlobs" TypeName="BlobShareDataStoreModel.BlobSetBlobs" StoreEntitySet="BlobSetBlobs">
+            <EndProperty Name="BlobSet">
+              <ScalarProperty Name="BlobSetId" ColumnName="BlobSetId" />
+            </EndProperty>
+            <EndProperty Name="Blob">
+              <ScalarProperty Name="BlobId" ColumnName="BlobId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RolePermissions" TypeName="BlobShareDataStoreModel.RolePermissions" StoreEntitySet="RolePermissions">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Permission">
+              <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserPermissions" TypeName="BlobShareDataStoreModel.UserPermissions" StoreEntitySet="UserPermissions">
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Permission">
+              <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UsersRoles" TypeName="BlobShareDataStoreModel.UsersRoles" StoreEntitySet="UsersRoles">
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="BlobShareModel" ZoomLevel="82">
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.BlobEvent" Width="1.5" PointX="3" PointY="7.5" Height="2.414042968749996" />
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.Blob" Width="1.5" PointX="0.75" PointY="7.625" Height="2.2496956380208388" />
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.BlobSetEvent" Width="1.5" PointX="12" PointY="7.75" Height="2.4140429687500031" />
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.BlobSet" Width="1.5" PointX="3" PointY="10.875" Height="2.0853483072916674" />
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.Invitation" Width="1.5" PointX="12" PointY="10.875" Height="2.2496956380208246" />
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.Permission" Width="1.5" PointX="5.25" PointY="9.125" Height="2.2496956380208246" />
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.Role" Width="1.5" PointX="7.5" PointY="9.375" Height="1.7566536458333388" />
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.UserEvent" Width="1.5" PointX="12" PointY="13.875" Height="2.2496956380208228" />
+        <EntityTypeShape EntityType="BlobShareDataStoreModel.User" Width="1.5" PointX="9.75" PointY="8.875" Height="2.9070849609375102" />
+        <AssociationConnector Association="BlobShareDataStoreModel.FK_BlobEvents_Blobs" >
+          <ConnectorPoint PointX="2.25" PointY="8.74984781901042" />
+          <ConnectorPoint PointX="3" PointY="8.74984781901042" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.FK_BlobEvents_Users" >
+          <ConnectorPoint PointX="9.75" PointY="8.96875" />
+          <ConnectorPoint PointX="4.5" PointY="8.96875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.FK_Permissions_Blobs" >
+          <ConnectorPoint PointX="1.5" PointY="9.8746956380208388" />
+          <ConnectorPoint PointX="1.5" PointY="10.394521484374998" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="10.394521484374998" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="10.394521484374998" />
+          <ConnectorPoint PointX="5.25" PointY="10.394521484374998" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.FK_BlobSetEvents_BlobSets" >
+          <ConnectorPoint PointX="4.5" PointY="12.40246613411459" />
+          <ConnectorPoint PointX="10.416666666666666" PointY="12.40246613411459" />
+          <ConnectorPoint PointX="10.583333333333334" PointY="12.40246613411459" />
+          <ConnectorPoint PointX="11.75" PointY="12.40246613411459" />
+          <ConnectorPoint PointX="11.75" PointY="10.625" />
+          <ConnectorPoint PointX="12.75" PointY="10.625" />
+          <ConnectorPoint PointX="12.75" PointY="10.164042968750003" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.FK_BlobSetEvents_Users" >
+          <ConnectorPoint PointX="11.25" PointY="9.5195214843750016" />
+          <ConnectorPoint PointX="12" PointY="9.5195214843750016" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.FK_Permissions_BlobSets" >
+          <ConnectorPoint PointX="4.5" PointY="11.124847819010412" />
+          <ConnectorPoint PointX="5.25" PointY="11.124847819010412" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.FK_Invitations_Users" >
+          <ConnectorPoint PointX="11.25" PointY="11.328542480468755" />
+          <ConnectorPoint PointX="11.666666666666666" PointY="11.328542480468755" />
+          <ConnectorPoint PointX="11.833333333333334" PointY="11.328542480468755" />
+          <ConnectorPoint PointX="12" PointY="11.328542480468755" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.FK_UserEvents_Users" >
+          <ConnectorPoint PointX="10.5" PointY="11.78208496093751" />
+          <ConnectorPoint PointX="10.5" PointY="14.999847819010412" />
+          <ConnectorPoint PointX="12" PointY="14.999847819010412" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.BlobSetBlobs" >
+          <ConnectorPoint PointX="1.9062525" PointY="9.8746956380208388" />
+          <ConnectorPoint PointX="1.9062525" PointY="11.917674153645834" />
+          <ConnectorPoint PointX="3" PointY="11.917674153645834" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.RolePermissions" >
+          <ConnectorPoint PointX="6.75" PointY="10.253326822916669" />
+          <ConnectorPoint PointX="7.5" PointY="10.253326822916669" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.UserPermissions" >
+          <ConnectorPoint PointX="6.75" PointY="9.21875" />
+          <ConnectorPoint PointX="9.75" PointY="9.21875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlobShareDataStoreModel.UsersRoles" >
+          <ConnectorPoint PointX="9" PointY="10.253326822916669" />
+          <ConnectorPoint PointX="9.75" PointY="10.253326822916669" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

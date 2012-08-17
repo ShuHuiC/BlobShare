@@ -1,0 +1,33 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.RoleEditViewModel
+@{
+    ViewBag.Title = "Blob Share | Edit Role";
+}
+
+<h1>@Html.ActionLink("Roles", "Index") </h1>
+<h2>@Html.ActionLink(this.Model.OriginalName, "Details", new { id = this.Model.Id })</h2>
+
+<ul class="actions">
+    <li>@Html.ActionLink("Details", "Details", new { id = this.Model.Id }, new { @class = "btn details" })</li>
+</ul>
+
+@using (Html.BeginForm())
+{ 
+    <div class="form">
+        <div class="left-box">
+            <div class="editor-label">Name</div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name) 
+                @Html.HiddenFor(m => m.OriginalName)
+            </div>
+            <div class="editor-label">Description</div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.Description)
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+        </div>
+        <div class="submit clear">
+            <input type="submit" value="Update" />
+        </div>
+    </div>
+} 

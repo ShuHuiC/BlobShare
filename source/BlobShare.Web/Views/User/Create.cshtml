@@ -1,0 +1,58 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.UserViewModel
+@{
+    ViewBag.Title = "Blob Share | Invite User";
+}
+
+<h1>@Html.ActionLink("Users", "Index")</h1>
+<h2>Invite User</h2>
+    
+<ul class="actions">
+</ul>
+
+@using (Html.BeginForm())
+    { 
+    <div class="form">
+        <div class="editor-field">
+            @Html.ValidationMessageFor(m => m.CustomErrors) 
+        </div>
+
+        <div class="left-box">
+            <div class="editor-label">Name</div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name) 
+            </div>
+            <div class="editor-label">Email</div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email) 
+            </div>
+            <div class="editor-label">Roles</div>
+            <div class="editor-field">
+                @{
+                    int k = 1; 
+                    
+                    foreach (var role in this.Model.RoleNames)
+                    { 
+                        @Html.CheckBox("Role"+k); 
+                        @(" " + role)
+                        <br />
+                        k++;
+                    }
+                }
+
+            </div>
+        </div>
+        <div class="left-box">
+            <div class="editor-label">Personal Message</div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.PersonalMessage)
+                @Html.ValidationMessageFor(m => m.PersonalMessage)
+            </div>
+        </div>
+        <div class="submit clear">
+            <input type="submit" value="Create" />
+        </div>
+    </div>
+} 
+

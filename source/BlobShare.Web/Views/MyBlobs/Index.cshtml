@@ -1,0 +1,32 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Blob Share | My Blobs";
+}
+
+<h1>My Blobs</h1>
+    
+<div class="gridContainer">
+    <div id="myResourcesSearch" style="display: none">
+        <label>Filter:  <input type="text" class="searchbox" /></label>
+    </div>
+    <div id="myResourcesEmpty" class="empty" style="display: none">No blobs found.</div>
+    <div id="myResourcesResults" class="grid">Please wait. Loading your blobs...</div>
+    <div id="myResourcesPager" class="pager" style="display: none"></div>
+</div>
+
+@section StylesContent {
+    <script src="@Url.Content("~/Content/scripts/jquery-1.4.4.min.js")"></script>
+}
+
+<script>
+    var url = '@Url.Action("MyBlobs")';
+    var pageIdentifier = 'myResources';
+    var viewBlobUrl = '@Url.Action("ViewBlob")'
+    var viewBlobSetUrl = '@Url.Action("ViewBlobSet")'
+    var downloadBlobUrl = '@Url.Action("DownloadBlob")'
+</script>
+<script src="@Url.Content("~/Content/scripts/lib.common.js")"></script>
+<script src="@Url.Content("~/Content/scripts/lib.datagrid.js")"></script>
+<script src="@Url.Content("~/Content/scripts/lib.paginator.js")"></script>
+<script src="@Url.Content("~/Content/scripts/BlobShare.datagrid.js")"></script>
+<script src="@Url.Content("~/Content/scripts/page.myblobs.js")"></script>

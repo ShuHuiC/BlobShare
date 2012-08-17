@@ -1,0 +1,15 @@
+﻿@inherits System.Web.Mvc.WebViewPage<System.DateTime?>
+@Html.TextBox("", (Model.HasValue ? Model.Value.ToLocalTime().ToShortDateString() : string.Empty), new { @class = "datePicker" })
+<style type="text/css">
+    .ui-datepicker-trigger 
+    {
+        cursor:pointer;
+        vertical-align:bottom;
+        margin-left:5px;
+    }
+</style>
+<script>
+    $(function() {
+        $(".datePicker").datepicker({ showOn: 'button', buttonImage: '@Url.Content("~/Content/images/calendar.png")', buttonImageOnly: true });
+    });
+</script>

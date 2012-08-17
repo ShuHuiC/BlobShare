@@ -1,0 +1,42 @@
+﻿@model Microsoft.Samples.DPE.BlobShare.Web.Models.UserViewModel
+@{
+    ViewBag.Title = "Blob Share | Edit User";
+}
+
+<h1>@Html.ActionLink("Users", "Index")</h1>
+<h2>@Html.ActionLink(Model.OriginalName, "Details", new { id = this.Model.Id })</h2>
+
+<ul class="actions">
+    <li>@Html.ActionLink("Details", "Details", new { id = this.Model.Id }, new { @class = "btn details" })</li>
+    <li>@Html.ActionLink("Invite", "Invite", new { id = Model.Id}, new { @class = "btn invitations" })</li>
+    <li>@Html.ActionLink("New User", "Create", null, new { @class = "btn add" })</li>
+</ul>
+
+@using (Html.BeginForm())
+{
+    <div class="form">
+        <div class="left-box">
+            <div class="editor-label">Name</div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+                @Html.HiddenFor(m => m.OriginalName)
+            </div>
+            <div class="editor-label">Email</div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="editor-label">Status</div>
+            <div class="editor-field">
+                @Html.RadioButtonFor(m => m.Status, 0) Active &nbsp; &nbsp;
+                @Html.RadioButtonFor(m => m.Status, 1) Inactive
+                @Html.ValidationMessageFor(m => m.Status)
+            </div>
+        </div>
+        <div class="submit clear">
+            <input type="submit" value="Update" />
+        </div>
+    </div>
+}
+

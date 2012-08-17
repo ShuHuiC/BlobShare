@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Microsoft.Samples.DPE.BlobShare.Web.Models.RoleViewModel>
+@{
+    ViewBag.Title = "Blob Share | Roles";
+}
+
+<h1>Roles</h1>
+
+<ul class="actions">
+    <li>@Html.ActionLink("New", "Create", null, new { @class = "btn add" })</li>
+</ul>
+
+@if(Model.Count() > 0) { 
+<div class="grid">
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in this.Model.Select(m => m.Role))
+    { 
+        <tr>
+            <td>
+                @Html.ActionLink(item.RoleName, "Details", new { id = item.RoleId })
+            </td>
+            <td>
+                @item.Description 
+            </td>
+        </tr>
+    } 
+    </tbody>
+</table>
+</div>
+} else { 
+    <div class="empty">No roles have been created.</div>
+} 
+

@@ -1,0 +1,178 @@
+* { padding: 0; margin: 0; }
+body {
+	background-color: #e6e6e6; color: #7b8185;
+	text-align: center; padding: 45px 45px 0 45px;
+	}
+
+body, td, input, textarea, select, th  { font: 16px Segoe UI, Verdana }
+ul, ol { padding: 5px 15px; }
+p { padding: 10px 0; }
+h1, h2, h3, h4, h5, h6 { margin: 0 0 10px 0; }
+h1 { font: 32px Segoe WP Black, Segoe UI, Verdana; color: #f60 }
+h2 { font: 24px Segoe UI, Verdana; color: #f60 }
+h3 { font: 18px Segoe UI, Verdana; color: #f60; font-weight: bold; }
+a { color: #f60; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* rounded box */
+body { text-align: center; }
+#container {
+    margin: auto; text-align: left; /* center */ 
+    min-width:960px;
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	box-shadow: 0px 5px 15px #ddd; -moz-box-shadow: 0px 5px 15px #ddd; -webkit-box-shadow: 0px 5px 15px #ddd;
+}
+
+/* header */
+header {
+	height: 50px; line-height: 50px; padding: 0 30px 0 10px;
+	background: #7c8287 url(../images/header_bg.png) repeat-x top left; border-radius: 5px 5px 0 0;
+	font-size: 13px; color: #fff;
+	}
+	header h1 { display: none; padding: 0 20px; }
+	header a { color: #fff; font-weight: bold; }
+    #userInfo { float: right; }
+	
+	/* navbar */
+	nav { height: 50px; background: url(../images/header_icon.png) no-repeat center left; padding-left: 40px; }
+	nav ul { list-style: none; padding: 0; display: inline; }
+	nav ul li { display: inline; padding-left: 5px; }
+	nav ul li a { margin-left: 5px; }
+	nav ul li::before { content: " / "; }
+	nav ul li:first-child { padding-left: 0; }
+	nav ul li:first-child::before { content: ""; }
+
+	
+/* main section & footer */
+section#main {
+    background-color: #fff; border-radius: 0 0 5px 5px; padding: 20px;
+    position: relative;
+    min-height: 200px;
+    }
+    h1 {
+        text-transform: uppercase; margin: 0; padding: 0;
+        line-height: .8em;
+        margin-bottom: 10px;
+        }
+    
+footer {
+    margin: auto; text-align: right;
+    padding-top: 15px;
+    font-size: 13px;
+}
+
+/* general content elements */
+section.warning { background-color: #ddd; padding: 20px 10px; }
+section.warning h1 { font-size: 17px; color: #c00; }
+
+ul.actions { list-style: none; text-align: right; }
+ul.actions li { padding: 0; margin: 0 0 0 10px; display: inline; }
+div.accountActions { margin-top:8px; }
+
+.clear { clear:both }
+.desc { width: 50%; padding-top: 60px; }
+.empty { font-style: italic; padding-top: 10px; padding-bottom: 10px; }
+.addbox { padding-bottom:20px; }    
+.left-box { width:400px; float:left; }
+.left-box input[type="text"] { width:370px; }
+.left-box textarea { width:370px; height:170px;}
+
+/* reports */
+.reportPane { height:180px; width:920px; margin:0; }
+.reportColumn { float:left; border-left: 1px dotted #bfbfbf; height:100%; min-height:100%; }
+.reportColumn .editor-label { font-weight:bold; margin:10px 0; }
+.reportColumn.first { border: 0; margin-left:2px; }
+.reportColumn.first > div { margin-left:0px; }
+.reportColumn > div { margin:0 40px; }
+.reportColumn > div > div.submit { margin-top:40px; text-align:right; }
+.reportColumn input[type=text] { width:230px;}    
+
+/* action buttons */
+.btn {
+    display: inline-block; height: 31px; line-height: 31px;
+    font-weight: bold;
+    padding-right: 35px; background-image: url(../images/button_icons.png); background-repeat: no-repeat; background-position: 100% -31px;
+    }
+    .upload { background-position: 100% 0px; }
+    .details { background-position: 100% -31px; }
+    .delete { background-position: 100% -186px; }
+    .edit { background-position: 100% -31px; }
+    .download { background-position: 100% -62px; }
+    .permissions { background-position: 100% -93px; }
+    .add { background-position: 100% -124px; }
+    .invitations { background-position: 100% -155px; }
+    .notifications { background-position: 100% -155px; }
+
+/* Dialogs */
+#dialog-confirm 
+{
+    display:none;
+}
+
+/* grids */
+.grid table { width: 100%; border-collapse: collapse; }
+.grid table th { font-weight: bold; padding: 4px 6px; text-align:left;}
+.grid table td { border-top: 1px dotted #bfbfbf; padding: 4px 6px; }
+.grid table th:first-child { padding-left:0px; }
+.grid table td:first-child { padding-left:0px; }
+.grid table th:last-child { padding-right:0px; }
+.grid table td:last-child { padding-right:0px; }
+
+.gridContainer { margin-top:30px; }
+.pager { text-align:center }
+.searchbox { width:300px; margin-bottom:10px; }
+
+.grid table.grid th.sortable { cursor: pointer; }
+.grid table.grid th span.sort {
+    display: inline-block; width: 9px; height: 6px;
+    margin-left: 5px;
+    background: url(../images/icon_sort.gif) no-repeat;
+    background-position: 100px 0px;
+}
+.grid table.grid th.sortUp span.sort {
+    background-position: 0px 0px;
+}
+.grid table.grid th.sortDown span.sort {
+    background-position: 0px -100px;
+}
+
+/* lists */
+dl { padding-bottom: 20px; }
+dl dt { font-weight: bold; }
+dl dd { padding-bottom: 10px; }
+
+/* form elements */
+input[type=text], textarea { border: 1px solid #999; padding-left: 3px }
+input[type=text]:active, textarea:active { border-color: #000; /* TODO: Remove focus border */ }
+input[type=submit],
+input[type=button] {
+    border: 0; background-color: #f60;
+    margin: 0; padding: 2px 15px; color: #fff; font-weight: bold;
+    cursor:pointer;
+    text-transform: uppercase;
+}
+input[type=submit]:hover,
+input[type=button]:hover { background-color: #000; }
+
+input[disabled], input.disabled,
+input[disabled]:hover, input.disabled:hover
+{
+    border: 0;
+    background-color: #C0C0C0;
+    margin: 0;
+    padding: 2px 15px;
+    font-weight: bold;
+    cursor: default;
+    text-transform: uppercase;
+}
+
+/* forms layout */
+.form {}
+.form .editor-label { font-size: 18px; margin-top: 10px; }
+.form .editor-field {  }
+.form .submit { padding: 10px 0; }
+.input-validation-error { border-color: #f00 !important; }
+.field-validation-error { color: #f00; padding-left: 4px; }
+.validation-summary-errors { color: #f00; padding-left: 4px; }
+.smtp-error { margin-top: 7px; font-size: 85%; width: 510px; }
+.smtp-error span { padding-left: 0px; }

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Microsoft.Samples.DPE.BlobShare.Web.Models.BlobSetViewModel>
+
+@{
+    ViewBag.Title = "Blob Share | Blob Sets";
+}
+
+<h1>Blob Sets</h1>
+
+<ul class="actions">
+    <li>@Html.ActionLink("New", "Create", null, new { @class = "btn add" })</li>
+</ul>
+
+@if (this.Model.Count() > 0) {
+<div class="grid">
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in this.Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", new { id = item.BlobSetId })
+            </td>
+            <td>
+                @item.Description
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+</div>
+} else {
+    <div class="empty">You don't have any blob sets linked to your account.</div>
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Enable IE9 Standards mode -->
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta charset="utf-8" />
+    <title>@(ViewBag.Title ?? "Blob Share")</title>
+    <link href="@Url.Content("~/Content/styles/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+    @RenderSection("StylesContent", false)
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Blob Share</h1>
+            @Html.Partial("_LogOnPartial")
+            @Html.Partial("_Navigation")
+        </header>
+        <section id="main">
+            @RenderBody()            
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2012 Microsoft Corporation. All rights reserved. <br>
+        (@(System.Reflection.Assembly.GetAssembly(typeof(Microsoft.Samples.DPE.BlobShare.Web.MvcApplication)).GetName().Version.ToString()))</p>
+    </footer>
+    @RenderSection("ScriptsContent", false)
+</body>
+</html>
